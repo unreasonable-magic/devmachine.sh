@@ -5,6 +5,10 @@ export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
 bin_name="${0##*/}"
 
 case "$1" in
+  init)
+    exec "$DEVMACHINE_PATH/cli/$bin_name/init.sh" "${@:2}"
+    ;;
+
   shellenv)
     exec "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:2}"
     ;;
