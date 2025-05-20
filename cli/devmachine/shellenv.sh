@@ -24,9 +24,28 @@ fi
 
 echo '__devmachine_init_start="$(date +%s%N)"'
 
-cat "$DEVMACHINE_PATH/shell/env.sh"
+cat <<- EOF
+cache_path="$XDG_CACHE_HOME/devmachine"
+shellenv_cache_path="\$cache_path/shellenv_$shell_name.sh"
+
+if [[ -e "\$shellenv_cache_path" ]]; then
+
+  source "\$shellenv_cache_path"
+
+else
+  mkdir -p "\$cache_path"
+
+  tools=("homebrew" "mise" "vim" "lsd" "bat" "less" "zoxide" "$shell_name")
+
+  for t in \${tools[@]}; do
+    shellenv="\$(devtool "\$t" shellenv $shell_name)"
+    eval "\$shellenv"
+    echo -E "\$shellenv" >> "\$shellenv_cache_path"
+  done
+fi
+EOF
 
 echo '__devmachine_init_end="$(date +%s%N)"'
 echo 'export DEVMACHINE_INIT_RUNTIME="$((__devmachine_init_end - __devmachine_init_start))"'
 
-printf "devtool $shell_name motd"
+echo "devtool $shell_name motd"
