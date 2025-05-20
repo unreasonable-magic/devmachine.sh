@@ -6,7 +6,14 @@ After a fresh install, there are 2 main tasks to get a machine ready for coding:
 
 Keeping dotfiles in sync across machines is also a bit of a challenge (not a challenge that this project is taking on right way) but the main purpose here, is to provide a framework/layout of how to better organize the tools you "care about". Do I care about Postgres config? No. Redis? No. Vim? Yes. Ghostty? Yes. The tools I drive on a daily basis are highly tuned to my workflow, so they should be treated better, not just have their configs thrown in a repo.
 
-## Status
+## How it works
+
+`devmachine` supports both zsh and bash (3.2+). devmachine takes over the entire bootstrap process of yyour shell. Each tool defines it's own `shellenv` that's injected into the shell boot process. This means instead of cluttering your `.bashrc` and `.zshrc` files with a bunch of random stuff, this is all you need:
+
+```
+export DEVMACHINE_PATH="/Users/keithpitt/Code/devmachine"
+eval "$($DEVMACHINE_PATH/bin/devmachine shellenv $(which ${0#-}))"
+```
 
 This repo currently merges the tooling as well as my own dev configuration. At some point I'll split them, but this is the way it is for now.
 
@@ -82,3 +89,7 @@ Prety cool!
 That's all it does for now. I haven't run the tooling against my arch linux setup yet, so I'd like to get hyprland and waybar all in here. Then split out the tooling from my config, then I can ship it so everone can use it!
 
 You can use it now if you want, but it's very custom to me.
+
+## Caching
+
+devmachine caches all the shell setup so subsequent runs are fast. On a cold start (for me at least) my shell takes around 100ms to start. From cached, it's about 10ms. If things get weird, run `devmachine cachebust`
