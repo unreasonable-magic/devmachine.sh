@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # By default bash will wipe out the history file each time you start
 # a new bash session (which is very annoying when you open multiple
 # windows). `histappend` tells bash to add to the current history

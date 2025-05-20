@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 shell::prompt::render() {
   # Note: If you use bash's printf or echo -e, and if your text has \001 or
   # \002 immediately before a number, you'll hit a bash bug that causes it to
