@@ -5,8 +5,8 @@ GIT_CONFIG_PATH="${GIT_CONFIG_PATH:-$HOME/.config/git}"
 case "$1" in
 
   setup)
-    devmachine::install "git"
-    devmachine::linkfile "$DEVMACHINE_PATH/tools/git/config" "$GIT_CONFIG_PATH/config"
+    os::install "git"
+    os::linkfile "$DEVMACHINE_PATH/tools/git/config" "$GIT_CONFIG_PATH/config"
     ;;
 
   config)

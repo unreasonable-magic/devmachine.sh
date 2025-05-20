@@ -9,12 +9,12 @@ case "$1" in
     ;;
 
   setup)
-    devmachine::install "vim"
+    os::install "vim"
 
     curl -fLo "$VIM_CONFIG_PATH/autoload/plug.vim" --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-    devmachine::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+    os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
     ;;
 
   edit-config)

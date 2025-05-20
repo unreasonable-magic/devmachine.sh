@@ -1,24 +1,16 @@
 #!/usr/bin/env bash
 
-devmachine::sh() {
+os::sh() {
   echo "$@"
   eval "$@"
 }
 
-devmachine::install() {
+os::install() {
   export HOMEBREW_NO_ENV_HINTS=true
   brew install "$1"
 }
 
-devmachine::commandtest() {
-  if [[ -x "$(command -v $1)" ]]; then
-    echo "yes"
-  else
-    exit 1
-  fi
-}
-
-devmachine::linkfile() {
+os::linkfile() {
   local source_file="$1"
   local target_link="$2"
 

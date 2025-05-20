@@ -12,12 +12,12 @@ case "$1" in
     ;;
 
   setup)
-    devmachine::install "ghostty"
+    os::install "ghostty"
 
     # https://github.com/ghostty-org/ghostty/pull/1102/files
-    devmachine::sh touch "$HOME/.hushlogin"
+    os::sh touch "$HOME/.hushlogin"
 
-    devmachine::linkfile "$DEVMACHINE_PATH/tools/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
+    os::linkfile "$DEVMACHINE_PATH/tools/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
   config)

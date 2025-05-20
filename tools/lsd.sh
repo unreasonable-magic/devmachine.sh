@@ -5,8 +5,8 @@ LSD_CONFIG_PATH="${LSD_CONFIG_PATH:-$HOME/.config/lsd}"
 case "$1" in
 
   setup)
-    devmachine::install "lsd"
-    devmachine::linkfile "$DEVMACHINE_PATH/tools/lsd/config.yaml" "$LSD_CONFIG_PATH/config.yaml"
+    os::install "lsd"
+    os::linkfile "$DEVMACHINE_PATH/tools/lsd/config.yaml" "$LSD_CONFIG_PATH/config.yaml"
     ;;
 
   edit-config)

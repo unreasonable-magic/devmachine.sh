@@ -24,6 +24,8 @@ Plug 'tpope/vim-vinegar'
 " Figure out what the current indentation setup is automatically
 Plug 'tpope/vim-sleuth'
 
+Plug 'jremmen/vim-ripgrep'
+
 " Plug 'theRealCarneiro/hyprland-vim-syntax'
 
 " Opening test files like a baws.
