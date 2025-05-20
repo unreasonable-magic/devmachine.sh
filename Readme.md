@@ -8,7 +8,7 @@ Keeping dotfiles in sync across machines is also a bit of a challenge (not a cha
 
 ## How it works
 
-`devmachine` supports both zsh and bash (3.2+). devmachine takes over the entire bootstrap process of yyour shell. Each tool defines it's own `shellenv` that's injected into the shell boot process. This means instead of cluttering your `.bashrc` and `.zshrc` files with a bunch of random stuff, this is all you need:
+`devmachine` supports both zsh and bash (3.2+). devmachine takes over the entire bootstrap process of your shell. Each tool defines it's own `shellenv` that's injected into the shell boot process. This means instead of cluttering your `.bashrc` and `.zshrc` files with a bunch of random stuff, this is all you need:
 
 ```
 export DEVMACHINE_PATH="/Users/keithpitt/Code/devmachine"
