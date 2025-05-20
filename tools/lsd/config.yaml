@@ -5,3 +5,4 @@ display: almost-all
 
 ignore-globs:
   - .DS_Store
+  - .git
