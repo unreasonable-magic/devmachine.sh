@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+main() {
+  local cmd="$1"
+  shift
+
+  case "$cmd" in
+    shellenv)
+      exec "$DEVMACHINE_PATH/cli/shellenv.sh" "${@:1}"
+      ;;
+
+    cachebust)
+      rm -rf "$XDG_CACHE_HOME/devmachine"
+      ;;
+
+    edit)
+      exec "$DEVMACHINE_PATH/cli/edit.sh" "${@:1}"
+      ;;
+
+    *)
+      exec "$DEVMACHINE_PATH/cli/tools.sh" "${@:1}"
+      ;;
+  esac
+}
+
+main "$@"
