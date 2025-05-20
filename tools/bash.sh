@@ -2,6 +2,10 @@
 
 case "$1" in
 
+  logo)
+    ui::image "$DEVMACHINE_PATH/tools/bash/logo.png" 20 10
+    ;;
+
   setup)
     devmachine::install "bash"
     ;;
