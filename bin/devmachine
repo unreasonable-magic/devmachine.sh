@@ -2,20 +2,23 @@
 
 bin_name="${0##*/}"
 
-case "$1" in
+cmd="$1"
+shift
+
+case "$cmd" in
   shellenv)
-    source "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:1}"
     ;;
 
   cachebust)
-    source "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:1}"
     ;;
 
   edit)
-    source "$DEVMACHINE_PATH/cli/$bin_name/edit.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/edit.sh" "${@:1}"
     ;;
 
   *)
-    source "$DEVMACHINE_PATH/cli/$bin_name/tools.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/tools.sh" "${@:1}"
     ;;
 esac

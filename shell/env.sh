@@ -13,7 +13,7 @@ if [[ -e "$shellenv_cache_path" ]]; then
 else
   mkdir -p "$cache_path"
 
-  tools=("homebrew" "mise" "vim" "lsd" "bat" "less" "zoxide")
+  tools=("homebrew" "mise" "vim" "lsd" "bat" "less" "zoxide" "$SHELL")
 
   for t in ${tools[@]}; do
     shellenv="$(devtool "$t" shellenv $SHELL)"

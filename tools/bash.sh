@@ -13,6 +13,10 @@ case "$1" in
     chsh -s "$bash_path"
     ;;
 
+  shellenv)
+    cat "$DEVMACHINE_PATH/tools/bash/shellenv.bash"
+    ;;
+
   --check-installed)
     command -v bash &> /dev/null && echo yes
     ;;

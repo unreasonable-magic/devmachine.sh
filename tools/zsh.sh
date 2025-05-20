@@ -13,6 +13,10 @@ case "$1" in
     chsh -s "$zsh_path"
     ;;
 
+  shellenv)
+    cat "$DEVMACHINE_PATH/tools/zsh/shellenv.zsh"
+    ;;
+
   --check-installed)
     command -v zsh &> /dev/null && echo yes
     ;;
