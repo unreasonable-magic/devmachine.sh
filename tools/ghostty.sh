@@ -5,10 +5,7 @@ GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 case "$1" in
 
   logo)
-    logo_path="$DEVMACHINE_PATH/tools/ghostty/logo.png"
-    encoded=$(echo "$logo_path" | tr -d '\n' | base64 | tr -d '=' | tr -d '\n')
-
-    printf "\n\e_Ga=T,q=2,f=100,t=f,c=17,r=10;%s\e\\ \n\n" "$encoded"
+    ui::image "$DEVMACHINE_PATH/tools/ghostty/logo.png"
     ;;
 
   setup)

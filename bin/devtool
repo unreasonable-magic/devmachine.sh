@@ -2,6 +2,7 @@
 
 source "$DEVMACHINE_PATH/lib/os.sh"
 source "$DEVMACHINE_PATH/lib/cache.sh"
+source "$DEVMACHINE_PATH/lib/ui.sh"
 
 bin_name="${0##*/}"
 tool_path="$1"
@@ -23,7 +24,7 @@ fi
 
 case "$2" in
   "")
-    exec "$DEVMACHINE_PATH/cli/$bin_name/splash.sh" "${tool_path}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/splash.sh" "${tool_path}"
     ;;
 
   *)

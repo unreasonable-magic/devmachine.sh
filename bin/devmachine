@@ -4,18 +4,18 @@ bin_name="${0##*/}"
 
 case "$1" in
   shellenv)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:2}"
     ;;
 
   cachebust)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:2}"
     ;;
 
   edit)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/edit.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/edit.sh" "${@:2}"
     ;;
 
   *)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/tools.sh" "${@:2}"
+    source "$DEVMACHINE_PATH/cli/$bin_name/tools.sh" "${@:2}"
     ;;
 esac
