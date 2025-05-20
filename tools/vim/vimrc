@@ -212,6 +212,8 @@ let g:splitjoin_trailing_comma = 1
 let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_hanging_args = 0
 
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+
 " Trying to leave an unsaved buffer will fail without this
 set hidden
 

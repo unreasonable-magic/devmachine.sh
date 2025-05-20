@@ -5,7 +5,7 @@ VIM_CONFIG_PATH="${VIM_CONFIG_PATH:-$HOME/.config/vim}"
 case "$1" in
 
   logo)
-    echo -e "\n$(cat ./tools/vim/logo.ansi)\n"
+    echo -e "\n$(cat $DEVMACHINE_PATH/tools/vim/logo.ansi)\n"
     ;;
 
   setup)
