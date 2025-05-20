@@ -15,12 +15,23 @@ if [[ "$os" == "Darwin" ]]; then
   cat "$DEVMACHINE_PATH/os/darwin.sh"
 fi
 
+# zsh_date_load=""
+# date_cmd=""
+# if [[ "$shell_name" == "zsh" ]]; then
+#   date_cmd="\"\${\${EPOCHREALTIME/[^0-9]/}%???}\""
+#   zsh_date_load="zmodload zsh/datetime"
+# elif [[ "$shell_name" == "bash" ]]; then
+#   date_cmd="\$(date +%s%N)"
+# fi
+
 cat <<- EOF
 export SHELL='$shell_name'
 
 PATH="\$PATH:$DEVMACHINE_PATH/bin"
 
-__devmachine_init_start="\$(date +%s%N)"
+# \$zsh_date_load
+
+# __devmachine_init_start=\$date_cmd
 
 cache_path="\$XDG_CACHE_HOME/devmachine"
 shellenv_cache_path="\$cache_path/shellenv_$shell_name.sh"
@@ -39,8 +50,8 @@ else
   done
 fi
 
-__devmachine_init_end="\$(date +%s%N)"
-export DEVMACHINE_INIT_RUNTIME="\$((__devmachine_init_end - __devmachine_init_start))"
+# __devmachine_init_end=\$date_cmd
+# export DEVMACHINE_INIT_RUNTIME="\$((__devmachine_init_end - __devmachine_init_start))"
 
 devtool $shell_name motd
 EOF
