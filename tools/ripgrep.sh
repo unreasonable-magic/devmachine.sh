@@ -7,11 +7,11 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v ripgrep &> /dev/null && echo yes
+    command -v rg &> /dev/null && echo yes
     ;;
 
   --check-version)
-    ripgrep --version | cut -d ' ' -f 2
+    rg --version | cut -d ' ' -f 2
     ;;
 
 esac
