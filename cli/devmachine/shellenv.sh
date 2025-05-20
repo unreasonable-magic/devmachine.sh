@@ -41,9 +41,24 @@ if [[ -e "\$shellenv_cache_path" ]]; then
 else
   mkdir -p "\$cache_path"
 
-  tools=("homebrew" "mise" "vim" "lsd" "bat" "less" "zoxide" "$shell_name")
+  declare -a installed_tools
 
-  for t in \${tools[@]}; do
+  for t in "\${DEVMACHINE_PATH}"/tools/*.sh; do
+    t="\${t##*/}"
+    t="\${t/.sh/}"
+    check=\$(\$DEVMACHINE_PATH/bin/devtool "\$t" --check-installed)
+    if [[ "\$check" == "yes" ]]; then
+      installed_tools+=("\$t")
+    fi
+  done
+
+  for t in \${installed_tools[@]}; do
+    shellenv="\$(devtool "\$t" shellenv.priority $shell_name)"
+    eval "\$shellenv"
+    echo -E "\$shellenv" >> "\$shellenv_cache_path"
+  done
+
+  for t in \${installed_tools[@]}; do
     shellenv="\$(devtool "\$t" shellenv $shell_name)"
     eval "\$shellenv"
     echo -E "\$shellenv" >> "\$shellenv_cache_path"

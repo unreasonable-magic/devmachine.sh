@@ -6,7 +6,7 @@ case "$1" in
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ;;
 
-  shellenv)
+  shellenv.priority)
     /opt/homebrew/bin/brew shellenv
 
     # man bash always shows the installed version of man, not the one

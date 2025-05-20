@@ -9,7 +9,7 @@ tool_name="$(basename -s ".sh" "$tool_path")"
 # It then strips the leading whitespace, as well as the trailing ")"
 discovered_commands=$(
   cat "$tool_path" |
-    grep --extended-regexp --ignore-case '^\s*[a-z\-]+)' |
+    grep --extended-regexp --ignore-case '^\s*[a-z\.\-]+)' |
     sed -E "s/^ *//g" |
     sed -E "s/)$//g"
 )

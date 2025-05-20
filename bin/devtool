@@ -30,6 +30,6 @@ case "$2" in
     ;;
 
   *)
-    source "$tool_path" "$2"
+    source "$tool_path" "${@:2}"
     ;;
 esac

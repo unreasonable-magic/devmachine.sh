@@ -14,7 +14,11 @@ case "$1" in
     ;;
 
   shellenv)
-    cat "$DEVMACHINE_PATH/tools/zsh/shellenv.zsh"
+    if [[ "$2" == "zsh" ]]; then
+      cat "$DEVMACHINE_PATH/tools/zsh/shellenv.zsh"
+    else
+      echo "# skipping zsh shellenv"
+    fi
     ;;
 
   motd)

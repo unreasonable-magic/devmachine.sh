@@ -18,7 +18,11 @@ case "$1" in
     ;;
 
   shellenv)
-    cat "$DEVMACHINE_PATH/tools/bash/shellenv.bash"
+    if [[ "$2" == "bash" ]]; then
+      cat "$DEVMACHINE_PATH/tools/bash/shellenv.bash"
+    else
+      echo "# skipping bash shellenv"
+    fi
     ;;
 
   motd)
