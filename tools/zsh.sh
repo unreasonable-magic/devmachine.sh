@@ -18,7 +18,7 @@ case "$1" in
     ;;
 
   motd)
-    source "$DEVMACHINE_PATH/tools/zsh/motd.zsh"
+    exec "$DEVMACHINE_PATH/tools/zsh/motd.zsh"
     ;;
 
   --check-installed)
