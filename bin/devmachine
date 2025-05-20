@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
+
 bin_name="${0##*/}"
 
 case "$1" in

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
+
 source "$DEVMACHINE_PATH/lib/os.sh"
 source "$DEVMACHINE_PATH/lib/cache.sh"
 source "$DEVMACHINE_PATH/lib/ui.sh"
