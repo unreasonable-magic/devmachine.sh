@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   setup)
-    devmachine::install "bash"
+    os::install "bash"
     ;;
 
   make-default)

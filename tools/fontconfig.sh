@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "fontconfig"
+    os::install "fontconfig"
     ;;
 
   --check-installed)

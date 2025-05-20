@@ -3,8 +3,8 @@
 case "$1" in
 
   setup)
-    devmachine::install "bat"
-    devmachine::install "bat-extras"
+    os::install "bat"
+    os::install "bat-extras"
     ;;
 
   shellenv)

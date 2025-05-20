@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "ripgrep"
+    os::install "ripgrep"
     ;;
 
   --check-installed)

@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "fd"
+    os::install "fd"
     ;;
 
   --check-installed)

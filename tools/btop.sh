@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "btop"
+    os::install "btop"
     ;;
 
   --check-installed)

@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "delta"
+    os::install "delta"
     ;;
 
   --check-installed)

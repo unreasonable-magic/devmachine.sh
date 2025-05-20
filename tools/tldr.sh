@@ -5,7 +5,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "tldc"
+    os::install "tldc"
     ;;
 
   --check-installed)

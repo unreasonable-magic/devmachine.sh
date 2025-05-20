@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "zip"
+    os::install "zip"
     ;;
 
   --check-installed)

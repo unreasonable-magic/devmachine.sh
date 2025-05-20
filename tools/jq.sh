@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "jq"
+    os::install "jq"
     ;;
 
   --check-installed)

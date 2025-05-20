@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "fastfetch"
+    os::install "fastfetch"
     ;;
 
   --check-installed)

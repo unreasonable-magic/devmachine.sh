@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "curl"
+    os::install "curl"
     ;;
 
   --check-installed)

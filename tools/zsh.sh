@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "zsh"
+    os::install "zsh"
     ;;
 
   make-default)

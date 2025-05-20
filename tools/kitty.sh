@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "kitty"
+    os::install "kitty"
     ;;
 
   --check-installed)

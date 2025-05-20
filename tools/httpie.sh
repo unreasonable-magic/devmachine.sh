@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "httpie"
+    os::install "httpie"
     ;;
 
   --check-installed)

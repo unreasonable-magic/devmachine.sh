@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "docker"
+    os::install "docker"
     ;;
 
   --check-installed)

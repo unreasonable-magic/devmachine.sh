@@ -29,7 +29,7 @@
 case "$1" in
 
   setup)
-    devmachine::install "most"
+    os::install "most"
     ;;
 
   --check-installed)
