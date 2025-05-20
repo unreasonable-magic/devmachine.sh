@@ -17,6 +17,10 @@ case "$1" in
     cat "$DEVMACHINE_PATH/tools/bash/shellenv.bash"
     ;;
 
+  motd)
+    source "$DEVMACHINE_PATH/tools/bash/motd.bash"
+    ;;
+
   --check-installed)
     command -v bash &> /dev/null && echo yes
     ;;

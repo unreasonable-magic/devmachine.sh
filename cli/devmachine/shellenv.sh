@@ -27,6 +27,6 @@ echo '__devmachine_init_start="$(date +%s%N)"'
 cat "$DEVMACHINE_PATH/shell/env.sh"
 
 echo '__devmachine_init_end="$(date +%s%N)"'
-echo 'DEVMACHINE_INIT_RUNTIME="$((__devmachine_init_end - __devmachine_init_start))"'
+echo 'export DEVMACHINE_INIT_RUNTIME="$((__devmachine_init_end - __devmachine_init_start))"'
 
-cat "$DEVMACHINE_PATH/shell/$shell_name/motd.$shell_name"
+printf "devtool $shell_name motd"

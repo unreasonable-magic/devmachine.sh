@@ -17,6 +17,10 @@ case "$1" in
     cat "$DEVMACHINE_PATH/tools/zsh/shellenv.zsh"
     ;;
 
+  motd)
+    source "$DEVMACHINE_PATH/tools/zsh/motd.zsh"
+    ;;
+
   --check-installed)
     command -v zsh &> /dev/null && echo yes
     ;;
