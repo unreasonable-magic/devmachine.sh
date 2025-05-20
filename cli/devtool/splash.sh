@@ -33,7 +33,7 @@ for cmd in ${commands[@]}; do
 done
 
 echo
-read -p "Enter 1-$idx (or blank to edit $tool_name.sh): " -r input
+read -p "Enter 1-$(($idx - 1)) (or blank to edit $tool_name.sh): " -r input
 echo
 
 if [[ "$input" == "" ]]; then
