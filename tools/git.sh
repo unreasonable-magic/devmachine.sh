@@ -18,7 +18,6 @@ case "$1" in
     "$EDITOR" "$GIT_CONFIG_PATH/ignore"
     ;;
 
-
   --check-installed)
     command -v git &> /dev/null && echo yes
     ;;
