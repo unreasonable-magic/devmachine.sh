@@ -15,6 +15,15 @@ case "$1" in
 
     ;;
 
+  # todo
+  --check-priority)
+    echo "high"
+    ;;
+
+  --check-eligible)
+    [[ $(uname -s) == "Darwin" ]]
+    ;;
+
   --check-installed)
     command -v brew &> /dev/null && echo yes
     ;;
