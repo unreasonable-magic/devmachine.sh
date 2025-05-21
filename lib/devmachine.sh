@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source "$DEVMACHINE_PATH/lib/stdlib/error.sh"
+source "$DEVMACHINE_PATH/lib/stdlib/test.sh"
+source "$DEVMACHINE_PATH/lib/stdlib/image.sh"
+
+source "$DEVMACHINE_PATH/lib/devmachine/cache.sh"
+source "$DEVMACHINE_PATH/lib/devmachine/os.sh"

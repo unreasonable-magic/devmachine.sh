@@ -37,7 +37,7 @@ os::install() {
 os::softdelete() {
   local path="$1"
 
-  if [[ -e "$path" ]]; then
+  if stdlib::test::exists "$path"; then
     timestamp="$(date +%Y%m%d%H%M%S)"
     new_path="$path.$timestamp.devmachinebackup"
 
@@ -84,25 +84,21 @@ os::softdelete() {
 #   }
 # fi
 
-test::exists() {
-  [ -e "$1" ]
-}
-
 os::linkfile() {
   local source_file="$1"
   local target_link="$2"
 
-  if [[ ! -e  "$source_file" ]]; then
+  if ! stdlib::test::exists "$source_file"; then
     stdlib::error::fatal "$source_file no exist"
   fi
 
   target_dir="$(dirname "$target_link")"
 
-  if [[ ! -d "$target_dir" ]]; then
+  if ! stdlib::test::isdir "$target_dir"; then
     mkdir -p "$target_dir"
   fi
 
-  if test::exists "$target_link"; then
+  if stdlib::test::exists "$target_link"; then
     if [[ "$(realpath $source_file)" == "$(realpath $target_link)" ]]; then
       return
     else

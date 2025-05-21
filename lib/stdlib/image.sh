@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ui::image() {
+stdlib::ui::image() {
   path="$1"
   cols="$2"
   rows="$3"
