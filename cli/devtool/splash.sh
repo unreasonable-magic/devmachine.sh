@@ -11,7 +11,7 @@ discovered_commands=$(
   cat "$tool_path" |
     grep --extended-regexp --ignore-case '^\s*[a-z\.\-]+)' |
     sed -E "s/^ *//g" |
-    sed -E "s/)$//g"
+    sed -E "s/\)$//g"
 )
 
 # Turn the discovered commands into an array
