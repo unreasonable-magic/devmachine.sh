@@ -6,16 +6,14 @@ case "$1" in
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ;;
 
-  shellenv.priority)
+  shellenv)
     /opt/homebrew/bin/brew shellenv
 
     # man bash always shows the installed version of man, not the one
     # installed with homebrew. dunno why...
     echo 'alias brewman="man -M /opt/homebrew/share/man"'
-
     ;;
 
-  # todo
   --check-priority)
     echo "high"
     ;;
