@@ -13,6 +13,8 @@ fi
 os="$(uname -s)"
 if [[ "$os" == "Darwin" ]]; then
   cat "$DEVMACHINE_PATH/os/darwin.sh"
+elif [[ "$os" == "Linux" ]]; then
+  cat "$DEVMACHINE_PATH/os/linux.sh"
 fi
 
 # zsh_date_load=""
