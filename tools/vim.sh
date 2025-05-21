@@ -14,7 +14,11 @@ case "$1" in
     curl -fLo "$VIM_CONFIG_PATH/autoload/plug.vim" --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+    os::softdelete "$HOME/.vimrc"
+    os::softdelete "$HOME/.vim"
     os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+
+    vim +PluginInstall +qall
     ;;
 
   edit-config)
