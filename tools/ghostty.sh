@@ -5,7 +5,7 @@ GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 case "$1" in
 
   logo)
-    ui::image "$DEVMACHINE_PATH/tools/ghostty/logo.png" 17 10
+    stdlib::image::print "$DEVMACHINE_PATH/tools/ghostty/logo.png" 17 10
     ;;
 
   setup)
