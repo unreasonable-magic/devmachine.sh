@@ -45,28 +45,41 @@ if [[ -e "\$shellenv_cache_path" ]]; then
 else
   mkdir -p "\$cache_path"
 
-  declare -a installed_tools
+  tools=""
 
-  for t in "\${DEVMACHINE_PATH}"/tools/*.sh; do
-    t="\${t##*/}"
-    t="\${t/.sh/}"
-    check=\$(\$DEVMACHINE_PATH/bin/devtool "\$t" --check-installed)
+  # Loop through each tool, check if it's installed, and add it to
+  # our running tools buffer
+  for tool_name in "\${DEVMACHINE_PATH}"/tools/*.sh; do
+    tool_name="\${tool_name##*/}"
+    tool_name="\${tool_name/.sh/}"
+
+    check=\$(\$DEVMACHINE_PATH/bin/devtool "\$tool_name" --check-installed)
     if [[ "\$check" == "yes" ]]; then
-      installed_tools+=("\$t")
+      priority="\$(devtool "\$tool_name" --check-priority)"
+      if [[ "\$priority" == "high" ]]; then
+        priority="100"
+      fi
+      tools+="\${priority:-0}\t\$tool_name\n"
     fi
   done
 
-  for t in \${installed_tools[@]}; do
-    shellenv="\$(devtool "\$t" shellenv.priority $shell_name)"
-    eval "\$shellenv"
-    echo -E "\$shellenv" >> "\$shellenv_cache_path"
-  done
+  # Now we have a tool list like:
+  #
+  #       foo
+  #   100 bar
+  #       bag
+  #
+  # We want to sort it based on priority so the imporant stuff
+  # gets added first to shellenv
+  tools="\$(echo -e "\$tools" | sort -g -r)"
 
-  for t in \${installed_tools[@]}; do
-    shellenv="\$(devtool "\$t" shellenv $shell_name)"
+  while IFS=$'\n' read -r line; do
+    tool_name="\$(echo "\$line" | cut -d \$'\\t' -f 2)"
+    shellenv="\$(devtool "\$tool_name" shellenv $shell_name)"
     eval "\$shellenv"
+    echo "###### \$ devtool \$tool_name shellenv $shell_name ######\n" >> "\$shellenv_cache_path"
     echo -E "\$shellenv" >> "\$shellenv_cache_path"
-  done
+  done <<< "\$tools"
 fi
 
 # __devmachine_init_end=\$date_cmd
