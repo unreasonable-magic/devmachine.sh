@@ -1,0 +1,32 @@
+@import "mocha.css";
+
+* {
+  font-size: 12px;
+  min-height: 0;
+  font-family: JetBrainsMono Nerd Font;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+}
+
+#workspaces {
+  border-radius: 1em;
+  margin-left: 1rem;
+}
+
+#workspaces button {
+  color: @text;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.4rem;
+  margin-right: 5px;
+}
+
+#workspaces button.active {
+  color: @sky;
+}
+
+#clock {
+  padding: 0rem 2rem;
+}

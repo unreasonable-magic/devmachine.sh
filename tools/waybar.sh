@@ -1,9 +1,14 @@
 #!/usr/bin/env devtool
 
+WAYBAR_CONFIG_PATH="${WAYBAR_CONFIG_PATH:-$HOME/.config/waybar}"
+
 case "$1" in
 
   setup)
     os::install "waybar"
+
+    os::linkfile "$DEVMACHINE_PATH/tools/waybar" "$WAYBAR_CONFIG_PATH"
+
     ;;
 
   --check-eligible)
