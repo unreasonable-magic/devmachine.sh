@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$DEVMACHINE_PATH/lib/devmachine.sh"
+
 installed_only="false"
 for arg; do
   case "$arg" in

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$DEVMACHINE_PATH/lib/devmachine.sh"
+
 shell_cmd="$1"
 if [[ "$shell_cmd" == "" ]]; then exit; fi
 
