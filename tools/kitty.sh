@@ -22,7 +22,7 @@ case "$1" in
     ;;
 
   --check-version)
-    kitty --version
+    kitty --version | cut -d ' ' -f 2
     ;;
 
 esac
