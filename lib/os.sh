@@ -5,14 +5,33 @@ os::sh() {
   eval "$@"
 }
 
-os::install() {
+os::install::tool() {
   local os="$(uname -s)"
   if [[ "$os" == "Linux" ]]; then
-    sudo pacman --sync --noconfirm --needed $1
+    echo "pacman"
   else
-    export HOMEBREW_NO_ENV_HINTS=true
-    brew install "$1"
+    echo "brew"
   fi
+}
+
+os::install::brew() {
+  export HOMEBREW_NO_ENV_HINTS=true
+  brew install "$1"
+}
+
+os::install::pacman() {
+  sudo pacman --sync --noconfirm --needed "$1"
+}
+
+os::install() {
+  case "$(os::install::tool)" in
+    pacman)
+      os::install::pacman "$@"
+      ;;
+    brew)
+      os::install::brew "$@"
+      ;;
+  esac
 }
 
 os::softdelete() {
