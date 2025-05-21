@@ -3,7 +3,7 @@
 case "$1" in
 
   setup)
-    os::install "delta"
+    os::install "git-delta"
     ;;
 
   --check-installed)
