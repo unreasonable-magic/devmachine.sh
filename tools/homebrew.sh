@@ -2,6 +2,10 @@
 
 case "$1" in
 
+  logo)
+    stdlib::image::print "$DEVMACHINE_PATH/tools/homebrew/logo.png" 15 9
+    ;;
+
   setup)
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ;;
