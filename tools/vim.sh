@@ -18,12 +18,16 @@ case "$1" in
     os::softdelete "$HOME/.vim"
     os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
 
-    vim +PluginInstall +qall
+    vim +PlugInstall +qall
+    ;;
+
+  reload-plugins)
+    vim +PlugInstall +qall
     ;;
 
   edit-config)
     "$EDITOR" "$VIM_CONFIG_PATH/vimrc"
-    vim +PluginInstall +qall
+    vim +PlugInstall +qall
     ;;
 
   shellenv)
