@@ -17,6 +17,10 @@ case "$1" in
     exec "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:2}"
     ;;
 
+  cachepath)
+    exec "$DEVMACHINE_PATH/cli/$bin_name/cachepath.sh" "${@:2}"
+    ;;
+
   edit)
     exec "$DEVMACHINE_PATH/cli/$bin_name/edit.sh" "${@:2}"
     ;;
