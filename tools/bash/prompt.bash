@@ -1,12 +1,3 @@
-# By default bash will wipe out the history file each time you start
-# a new bash session (which is very annoying when you open multiple
-# windows). `histappend` tells bash to add to the current history
-# file instead of wiping it
-shopt -s histappend
-
-# Also we want more history! Never forget!
-HISTSIZE=100000
-
 shell::prompt::render() {
   # Note: If you use bash's printf or echo -e, and if your text has \001 or
   # \002 immediately before a number, you'll hit a bash bug that causes it to

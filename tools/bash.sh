@@ -19,7 +19,8 @@ case "$1" in
 
   shellenv)
     if [[ "$2" == "bash" ]]; then
-      cat "$DEVMACHINE_PATH/tools/bash/shellenv.bash"
+      cat "$DEVMACHINE_PATH/tools/bash/history.bash"
+      cat "$DEVMACHINE_PATH/tools/bash/prompt.bash"
     else
       echo "# skipping bash shellenv"
     fi
