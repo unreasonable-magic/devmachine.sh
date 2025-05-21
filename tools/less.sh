@@ -13,7 +13,9 @@ case "$1" in
     # -i
     #   ignore case unless there's an uppercase letter
     #   in the search
-    echo 'export LESS="-w -i"'
+    # -R
+    #   make colors work
+    echo 'export LESS="-w -i -R"'
     ;;
 
   --check-installed)
