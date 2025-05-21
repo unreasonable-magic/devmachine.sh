@@ -15,7 +15,8 @@ case "$1" in
 
   shellenv)
     if [[ "$2" == "zsh" ]]; then
-      cat "$DEVMACHINE_PATH/tools/zsh/shellenv.zsh"
+      cat "$DEVMACHINE_PATH/tools/zsh/prompt.zsh"
+      cat "$DEVMACHINE_PATH/tools/zsh/completions.zsh"
     else
       echo "# skipping zsh shellenv"
     fi
