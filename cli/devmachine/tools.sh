@@ -11,7 +11,7 @@ for arg; do
   esac
 done
 
-for t in "${DEVMACHINE_PATH}"/tools/*.sh; do
+for t in "${DEVFILES_PATH}"/*.sh; do
   # Remove path from the tool name
   t="${t##*/}"
 

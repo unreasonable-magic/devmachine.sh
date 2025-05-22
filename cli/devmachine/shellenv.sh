@@ -49,7 +49,7 @@ else
 
   # Loop through each tool, check if it's installed, and add it to
   # our running tools buffer
-  for tool_name in "\${DEVMACHINE_PATH}"/tools/*.sh; do
+  for tool_name in "\${DEVFILES_PATH}"/*.sh; do
     tool_name="\${tool_name##*/}"
     tool_name="\${tool_name/.sh/}"
 
