@@ -1,6 +1,42 @@
 #!/usr/bin/env bash
 
 export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
+source "$DEVMACHINE_PATH/lib/devmachine.sh"
+
+# This since can either be run by itself:
+#
+#     $ devmachine xyz
+#
+# Or as part of a shebang in a dev file:
+#
+#     #!/usr/bin/env devmachine
+#
+#     case "$1" in
+#       setup)
+#         os::install "script"
+#         ;;
+#     esac
+#
+# When you run a script with a shebang, the kernal passes relative path
+# to the script to the program as the first argument. So this code here
+# detects for that latter case, and switches to running the dev file tasks
+# instead of the main CLI ones.
+#
+# The heuristic we use is:
+#
+# 1. More than 1 argument passed
+# 2. The first argument is a file (that exists)
+# 3. The file has *devmachine as the first line
+#
+if [[ "$#" -ge 1 ]]; then
+  if stdlib::test::exists "$1"; then
+    first_line=$(head -n1 "$1" 2>/dev/null)
+
+    if [[ "$first_line" == *devmachine ]]; then
+      exec "devtool" "$@"
+    fi
+  fi
+fi
 
 bin_name="${0##*/}"
 
