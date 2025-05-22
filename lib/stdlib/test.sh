@@ -7,3 +7,7 @@ stdlib::test::exists() {
 stdlib::test::isdir() {
   [ -d "$1" ]
 }
+
+stdlib::test::isfile() {
+  [ -f "$1" ]
+}

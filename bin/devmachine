@@ -26,7 +26,7 @@ if [[ "$#" -ge 1 ]]; then
     #
     # If it is, then we can just use that as the path, otherwise we'll
     # make up a path using DEVFILES_PATH
-    if ! stdlib::test::exists "$devfile"; then
+    if ! stdlib::test::isfile "$devfile"; then
       devfile="$DEVFILES_PATH/${devfile%\.sh}.sh"
 
       if ! stdlib::test::exists "$devfile"; then
