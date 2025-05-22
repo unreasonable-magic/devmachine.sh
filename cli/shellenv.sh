@@ -3,7 +3,10 @@
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
 shell_cmd="$1"
-if [[ "$shell_cmd" == "" ]]; then exit; fi
+if [[ "$shell_cmd" == "" ]]; then
+  echo "no shell passed"
+  exit;
+fi
 
 shell_name="${shell_cmd##*/}"
 
