@@ -47,6 +47,13 @@ os::softdelete() {
   fi
 }
 
+os::download() {
+  local url="$1"
+  local path="$1"
+
+  curl -fLo "$path" --silent --create-dirs "$url"
+}
+
 # return the full path to the passed
 # file, following all symlinks along the way
 # if readlink -e . >/dev/null 2>&1; then
