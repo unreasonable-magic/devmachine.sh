@@ -25,6 +25,8 @@ os::install::pacman() {
 }
 
 os::install() {
+  ui::logfunc "os::install" "$@"
+
   case "$(os::install::tool)" in
     pacman)
       os::install::pacman "$@"
@@ -36,6 +38,8 @@ os::install() {
 }
 
 os::softdelete() {
+  ui::logfunc "os::softdelete" "$@"
+
   local path="$1"
 
   if stdlib::test::exists "$path"; then
@@ -93,6 +97,8 @@ os::download() {
 # fi
 
 os::linkfile() {
+  ui::logfunc "os::linkfile" "$@"
+
   local source_file="$1"
   local target_link="$2"
 
@@ -114,6 +120,5 @@ os::linkfile() {
     fi
   fi
 
-  echo "linking ${source_file} to ${target_link}"
   ln -fs "$source_file" "$target_link"
 }
