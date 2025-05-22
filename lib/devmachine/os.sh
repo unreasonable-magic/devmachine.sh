@@ -15,8 +15,9 @@ os::install::tool() {
 }
 
 os::install::brew() {
+  export HOMEBREW_NO_INSTALL_UPGRADE=true
   export HOMEBREW_NO_ENV_HINTS=true
-  brew install "$1"
+  brew install "$1" -q
 }
 
 os::install::pacman() {
