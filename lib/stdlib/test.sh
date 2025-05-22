@@ -11,3 +11,7 @@ stdlib::test::isdir() {
 stdlib::test::isfile() {
   [ -f "$1" ]
 }
+
+stdlib::test::strblank() {
+  [ -z "$1" ]
+}
