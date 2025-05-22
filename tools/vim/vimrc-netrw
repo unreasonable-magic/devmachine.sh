@@ -1,0 +1,31 @@
+" Hide banner
+let g:netrw_banner = 0
+
+" Minimal set of things to hide. Generally I wanna show all the thing
+let g:netrw_list_hide = '.*\.swp$,\.DS_Store,\.git/'
+
+" Hide files in netrw by default (can be shown again by hitting `a`)
+let g:netrw_hide = 1
+
+" Tree-like view for netrw
+let g:netrw_liststyle = 3
+
+" Don't highlight the line the cursor is over
+let g:netrw_cursor = 0
+
+function! SmartExplore()
+    try
+        Rexplore
+    catch
+        edit .
+    endtry
+endfunction
+
+" Shortcut to just to the file list
+" map ,r :Rexplore<CR>
+nnoremap ,r :call SmartExplore()<CR>
+
+" Open current directory if no file specified
+if argc() == 0
+  autocmd VimEnter * Explore
+endif

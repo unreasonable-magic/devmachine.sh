@@ -17,6 +17,7 @@ case "$1" in
     os::softdelete "$HOME/.vimrc"
     os::softdelete "$HOME/.vim"
     os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+    os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
 
     vim +PlugInstall +qall
     ;;

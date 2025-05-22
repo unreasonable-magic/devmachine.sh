@@ -19,7 +19,7 @@ Plug 'nanotech/jellybeans.vim'
 " Plug 'luxed/ayu-vim' " official version not maintained anymore
 
 " Replace newrw
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 
 " Figure out what the current indentation setup is automatically
 Plug 'tpope/vim-sleuth'
@@ -45,7 +45,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'ervandew/supertab'
 
 " Best searching ever
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 
 " JSX & Javascript
 "Plug 'pangloss/vim-javascript'
@@ -64,6 +64,8 @@ Plug 'neoclide/jsonc.vim'
 " vim /Users/keithpitt/.gem/ruby/2.4.2/gems/letter_opener-1.5.0/lib/letter_opener/message.rb:12
 Plug 'bogado/file-line'
 
+Plug 'airblade/vim-rooter'
+
 " Ragel colors omg.
 "Plugin 'jneen/ragel.vim'
 
@@ -76,6 +78,9 @@ Plug 'bogado/file-line'
 " No one knows what it is...
 " Plugin 'file:///Users/keithpitt/Development/framework/vim-frontendlang'
 " set runtimepath^=~/.vim/bundle/vim-frontendlang
+
+" Automatically make folders if they don't exit
+Plug 'pbrisbin/vim-mkdir'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -148,9 +153,6 @@ map ; :
 " Automatically indent code
 set autoindent
 
-" Shortcut to just to the file list
-map ,r -
-
 " Shortcut to take us back to the previous buffer.
 map `` <C-^>
 
@@ -212,7 +214,7 @@ let g:splitjoin_trailing_comma = 1
 let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_hanging_args = 0
 
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+runtime vimrc-netrw
 
 " Trying to leave an unsaved buffer will fail without this
 set hidden
