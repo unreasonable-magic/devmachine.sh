@@ -37,7 +37,7 @@ read -p "Enter 1-$(($idx - 1)) (or blank to edit $tool_name.sh): " -r input
 echo
 
 if [[ "$input" == "" ]]; then
-  "$EDITOR" "${DEVMACHINE_PATH}/tools/$tool_name.sh"
+  "$EDITOR" "${DEVFILES_PATH}/$tool_name.sh"
 else
   source "$tool_path" "${commands[$(($input - 1))]}"
 fi
