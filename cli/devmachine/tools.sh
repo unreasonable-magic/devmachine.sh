@@ -18,12 +18,12 @@ for t in "${DEVFILES_PATH}"/*.sh; do
   # Now remove the extension
   t="${t/.sh/}"
 
-  check=$($DEVMACHINE_PATH/bin/devtool "$t" --check-installed)
+  check=$($DEVMACHINE_PATH/bin/devmachine "$t" --check-installed)
 
   if [[ "$check" == "yes" ]]; then
     printf "\e[0;32m"
     printf "%s " "$t"
-    printf $($DEVMACHINE_PATH/bin/devtool "$t" --check-version)
+    printf $($DEVMACHINE_PATH/bin/devmachine "$t" --check-version)
     printf "\e[0m\n"
   else
     # Filter our non-installed tools if we've been told to

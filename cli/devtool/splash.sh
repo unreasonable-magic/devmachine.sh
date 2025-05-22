@@ -28,7 +28,7 @@ source "$tool_path" "logo"
 
 declare -i idx=1
 for cmd in ${commands[@]}; do
-  printf "%s) \e[2mdevtool %s\e[0m %s\n" "$idx" "$tool_name" "$cmd"
+  printf "%s) \e[2mdevmachine %s\e[0m %s\n" "$idx" "$tool_name" "$cmd"
   idx+=1
 done
 

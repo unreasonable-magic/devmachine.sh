@@ -53,9 +53,9 @@ else
     tool_name="\${tool_name##*/}"
     tool_name="\${tool_name/.sh/}"
 
-    check=\$(\$DEVMACHINE_PATH/bin/devtool "\$tool_name" --check-installed)
+    check=\$(\$DEVMACHINE_PATH/bin/devmachine "\$tool_name" --check-installed)
     if [[ "\$check" == "yes" ]]; then
-      priority="\$(devtool "\$tool_name" --check-priority)"
+      priority="\$(devmachine "\$tool_name" --check-priority)"
       if [[ "\$priority" == "high" ]]; then
         priority="100"
       fi
@@ -75,9 +75,9 @@ else
 
   while IFS=$'\n' read -r line; do
     tool_name="\$(echo "\$line" | cut -d \$'\\t' -f 2)"
-    shellenv="\$(devtool "\$tool_name" shellenv $shell_name)"
+    shellenv="\$(devmachine "\$tool_name" shellenv $shell_name)"
     eval "\$shellenv"
-    echo "###### \$ devtool \$tool_name shellenv $shell_name ######\n" >> "\$shellenv_cache_path"
+    echo "###### \$ devmachine \$tool_name shellenv $shell_name ######\n" >> "\$shellenv_cache_path"
     echo -E "\$shellenv" >> "\$shellenv_cache_path"
   done <<< "\$tools"
 fi
@@ -85,5 +85,5 @@ fi
 # __devmachine_init_end=\$date_cmd
 # export DEVMACHINE_INIT_RUNTIME="\$((__devmachine_init_end - __devmachine_init_start))"
 
-devtool $shell_name motd
+devmachine $shell_name motd
 EOF

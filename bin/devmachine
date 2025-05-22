@@ -3,65 +3,79 @@
 export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
-# This since can either be run by itself:
+# This CLI can be run in either 2 "modes":
 #
-#     $ devmachine xyz
+#   1. Action mode (running commands across all dev files on the system)
+#   2. Devfile mode (running individual tasks inside a dev file)
 #
-# Or as part of a shebang in a dev file:
-#
-#     #!/usr/bin/env devmachine
-#
-#     case "$1" in
-#       setup)
-#         os::install "script"
-#         ;;
-#     esac
-#
-# When you run a script with a shebang, the kernal passes relative path
-# to the script to the program as the first argument. So this code here
-# detects for that latter case, and switches to running the dev file tasks
-# instead of the main CLI ones.
-#
-# The heuristic we use is:
-#
-# 1. More than 1 argument passed
-# 2. The first argument is a file (that exists)
-# 3. The file has *devmachine as the first line
+# The way we can tell the difference between them is whether or not
+# the first argument starts with a "+" or a "--"
 #
 if [[ "$#" -ge 1 ]]; then
-  if stdlib::test::exists "$1"; then
-    first_line=$(head -n1 "$1" 2>/dev/null)
+  devfile_or_action="$1"
 
-    if [[ "$first_line" == *devmachine ]]; then
-      exec "devtool" "$@"
+  if [[ ! "${devfile_or_action}" =~ ^(\+|\-\-) ]]; then
+    devfile="$devfile_or_action"
+
+    # Looks like we've been given a file! First thing we need to do is
+    # see if it exists in it's current path, e.g:
+    #
+    #   $ devmachine my_file.sh
+    #   $ devmachine file_in_some_folder.sh
+    #   $ ./relative_file_with_shebang.sh
+    #
+    # If it is, then we can just use that as the path, otherwise we'll
+    # make up a path using DEVFILES_PATH
+    if ! stdlib::test::exists "$devfile"; then
+      devfile="$DEVFILES_PATH/${devfile%\.sh}.sh"
+
+      if ! stdlib::test::exists "$devfile"; then
+        echo "no dev file $devfile"
+        exit 1
+      fi
     fi
+
+    # Now that we have our dev file, let's run it
+    case "$2" in
+      "")
+        source "$DEVMACHINE_PATH/cli/devtool/splash.sh" "${devfile}"
+        ;;
+
+      *)
+        source "$devfile" "${@:2}"
+        ;;
+    esac
+
+    exit
   fi
 fi
 
-bin_name="${0##*/}"
-
 case "$1" in
   +init)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/init.sh" "${@:2}"
+    exec "$DEVMACHINE_PATH/cli/devmachine/init.sh" "${@:2}"
     ;;
 
   +shellenv)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/shellenv.sh" "${@:2}"
+    exec "$DEVMACHINE_PATH/cli/devmachine/shellenv.sh" "${@:2}"
     ;;
 
   +cachebust)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/cachebust.sh" "${@:2}"
+    exec "$DEVMACHINE_PATH/cli/devmachine/cachebust.sh" "${@:2}"
     ;;
 
   +cachepath)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/cachepath.sh" "${@:2}"
+    exec "$DEVMACHINE_PATH/cli/devmachine/cachepath.sh" "${@:2}"
     ;;
 
   +ls)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/tools.sh" "${@:2}"
+    exec "$DEVMACHINE_PATH/cli/devmachine/tools.sh" "${@:2}"
+    ;;
+
+  ""|--help)
+    exec "$DEVMACHINE_PATH/cli/devmachine/help.sh" "${@:2}"
     ;;
 
   *)
-    exec "$DEVMACHINE_PATH/cli/$bin_name/help.sh" "${@:2}"
-    ;;
+    echo "devmachine: unknown command $1"
+    exit
 esac
