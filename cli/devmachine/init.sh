@@ -16,7 +16,7 @@ else
   stdlib::error::fatal "unsupported shell $target_shell"
 fi
 
-printf -v new_rc_body "export DEVMACHINE_PATH=\'%q\'\neval \"\$(\$DEVMACHINE_PATH/bin/devmachine shellenv \$(which \${0#-}))\"" $DEVMACHINE_PATH
+printf -v new_rc_body "export DEVMACHINE_PATH=\'%q\'\neval \"\$(\$DEVMACHINE_PATH/bin/devmachine +shellenv \$(which \${0#-}))\"" $DEVMACHINE_PATH
 
 echo "devmachine needs to take over your $rc_file file"
 echo

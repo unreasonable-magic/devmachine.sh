@@ -12,10 +12,10 @@ Keeping dotfiles in sync across machines is also a bit of a challenge (not a cha
 
 ```
 export DEVMACHINE_PATH="/Users/keithpitt/Code/devmachine"
-eval "$($DEVMACHINE_PATH/bin/devmachine shellenv $(which ${0#-}))"
+eval "$($DEVMACHINE_PATH/bin/devmachine +shellenv $(which ${0#-}))"
 ```
 
-(The above can be automatically added by running `devmachine init`, which will also take a backup of existing files if you have them)
+(The above can be automatically added by running `devmachine +init`, which will also take a backup of existing files if you have them)
 
 This repo currently merges the tooling as well as my own dev configuration. At some point I'll split them, but this is the way it is for now.
 
