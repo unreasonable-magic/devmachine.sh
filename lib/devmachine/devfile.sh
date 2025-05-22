@@ -11,3 +11,15 @@ devfile::list() {
     echo "$t"
   done
 }
+
+devfile::run() {
+  local action="$1"
+  local devfile="${DEVFILE_NAME}"
+
+  if [[ "$devfile" == "" ]]; then
+    echo "devfile::run no devfile passed"
+    exit 1
+  fi
+
+  devmachine "$devfile" "$action"
+}

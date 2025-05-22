@@ -35,6 +35,10 @@ if [[ "$#" -ge 1 ]]; then
       fi
     fi
 
+    # Useful for the devfile gear to know it's name and path
+    devfile_basename="$(basename "$devfile")"
+    export DEVFILE_NAME="${devfile_basename%.*}"
+
     # Now that we have our devfile, let's run it
     if [[ "$2" == "" ]]; then
       source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
