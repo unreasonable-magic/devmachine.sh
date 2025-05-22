@@ -37,7 +37,7 @@ if [[ "$#" -ge 1 ]]; then
 
     # Now that we have our devfile, let's run it
     if [[ "$2" == "" ]]; then
-      source "$DEVMACHINE_PATH/cli/devtool/splash.sh" "${devfile}"
+      source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
     else
       source "$devfile" "${@:2}"
     fi
@@ -56,7 +56,7 @@ elif [[ "$action" == "--version" ]]; then
   action="+version"
 fi
 
-cli_file="$DEVMACHINE_PATH/cli/devmachine/${action:1}.sh"
+cli_file="$DEVMACHINE_PATH/cli/${action:1}.sh"
 
 if stdlib::test::exists "$cli_file"; then
   exec "$cli_file"
