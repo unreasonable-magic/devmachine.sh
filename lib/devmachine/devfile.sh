@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 devfile::list() {
-  local only_installed="false"
+  local filter=""
   for arg; do
     case "$arg" in
-      --installed)
-        only_installed="true"
+      --filter)
+        filter="$2"
+        shift
         ;;
     esac
   done
@@ -17,10 +18,12 @@ devfile::list() {
     # Now remove the extension
     t="${t/.sh/}"
 
-    if [[ "$only_installed" == "true" ]]; then
+    if [[ "$filter" == *installed* ]]; then
       check=$($DEVMACHINE_PATH/bin/devmachine "$t" --check-installed)
 
-      if [[ "$check" == "yes" ]]; then
+      if [[ "$filter" == "installed" && "$check" == "yes" ]]; then
+        echo "$t"
+      elif [[ "$filter" == "notinstalled" && "$check" == "" ]]; then
         echo "$t"
       fi
     else

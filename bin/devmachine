@@ -51,20 +51,34 @@ if [[ "$#" -ge 1 ]]; then
 fi
 
 action="$1"
+cli_path="$DEVMACHINE_PATH/cli"
 
-# Even though our syntax has + as a prefix for action, let's be nice
-# and still support --help and --version
-if [[ "$action" == "--help" ]]; then
-  action="+help"
-elif [[ "$action" == "--version" ]]; then
-  action="+version"
-fi
+case "$action" in
+  # Even though our syntax has + as a prefix for action, let's be nice
+  # and still support --help and --version
+  --help)
+    exec "${cli_path}/help.sh"
+    ;;
+  --version)
+    exec "${cli_path}/version.sh"
+    ;;
 
-cli_file="$DEVMACHINE_PATH/cli/${action:1}.sh"
+  # You can technically run `devmachine +run installed configure`, but this just
+  # adds a bit of sugar so you can go directly to `devmachine +all`
+  +installed|+notinstalled|+all)
+    exec "${cli_path}/run.sh" "${1:1}" "${@:2}"
+    ;;
 
-if stdlib::test::exists "$cli_file"; then
-  exec "$cli_file" "${@:2}"
-else
-  echo "devmachine: unknown command $1"
-  exit
-fi
+  *)
+    # Strip the "+" from the start and find the matching cli file
+    action="${action:1}"
+    cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
+
+    if stdlib::test::exists "$cli_file"; then
+      exec "${cli_file}" "${@:2}"
+    else
+      echo "devmachine: unknown command $action"
+      exit
+    fi
+    ;;
+esac
