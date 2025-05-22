@@ -10,6 +10,11 @@
 
 [merge]
     conflictstyle = zdiff3
+
 [user]
-	email = git@keithpitt.email
-	name = Keith Pitt
+    email = git@keithpitt.email
+    name = Keith Pitt
+
+[commit]
+    # Show a diff when you open go to commit in a text editor
+    verbose = true
