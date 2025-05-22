@@ -59,7 +59,7 @@ fi
 cli_file="$DEVMACHINE_PATH/cli/${action:1}.sh"
 
 if stdlib::test::exists "$cli_file"; then
-  exec "$cli_file"
+  exec "$cli_file" "${@:2}"
 else
   echo "devmachine: unknown command $1"
   exit
