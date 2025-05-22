@@ -21,15 +21,13 @@ This repo currently merges the tooling as well as my own dev configuration. At s
 
 Here's how it all works:
 
-There are 2 main commands included:
-
 1) `devmachine` is the main control for all the tools
-2) `devtool` individual tool control
+2) You create "devfiles" and pass them to `devmachine`
 
 Running `devmachine` will list all the tools installed:
 
 ```
-$ devmachine tools
+$ devmachine +ls
 bash 5.2.37(1)-release
 bat 0.25.0
 btop btop
@@ -48,7 +46,7 @@ The tools I care about are listed in the `tools/` folder.
 Each tool is a bash script that looks like this:
 
 ```
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 
@@ -82,9 +80,9 @@ case "$1" in
 esac
 ```
 
-It's basically a bash case statement with various actions against the tool. When you run `devtool ghostty` on your machine, it shows this:
+It's basically a bash case statement with various actions against the tool. When you run `devmachine ghostty` on your machine, it shows this:
 
-![devtool ghostty](/docs/ghostty.png)
+![devmachine ghostty](/docs/ghostty.png)
 
 Prety cool!
 
