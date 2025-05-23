@@ -83,8 +83,8 @@ os::download() {
 os::linkfile() {
   ui::logfunc "os::linkfile" "$@"
 
-  local source_file="$1"
-  local target_link="$2"
+  local source_file="$(os::expandpath $1)"
+  local target_link="$(os::expandpath $2)"
 
   # If the file we're trying to link doesn't exist, then something the user has
   # done is very wrong, so we should error out and stop everything
