@@ -31,16 +31,3 @@ devfile::list() {
     fi
   done
 }
-
-devfile::run() {
-  ui::logfunc "devfile::run" "$@"
-
-  local action="$1"
-  local devfile="${DEVFILE_NAME}"
-
-  if [[ "$devfile" == "" ]]; then
-    stdlib::error::fatal "no devfile passed"
-  fi
-
-  "$DEVMACHINE_PATH/bin/devmachine" "$devfile" "$action"
-}
