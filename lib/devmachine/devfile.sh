@@ -41,5 +41,5 @@ devfile::run() {
     exit 1
   fi
 
-  devmachine "$devfile" "$action"
+  "$DEVMACHINE_PATH/bin/devmachine" "$devfile" "$action"
 }

@@ -39,5 +39,5 @@ echo
 if [[ "$input" == "" ]]; then
   "$EDITOR" "${DEVFILES_PATH}/$tool_name.sh"
 else
-  source "$tool_path" "${commands[$(($input - 1))]}"
+  "$DEVMACHINE_PATH/bin/devmachine" "$tool_path" "${commands[$(($input - 1))]}"
 fi
