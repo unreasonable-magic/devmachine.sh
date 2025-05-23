@@ -40,13 +40,14 @@ PATH="\$PATH:$DEVMACHINE_PATH/bin"
 
 # __devmachine_init_start=\$date_cmd
 
-cache_path="\$XDG_CACHE_HOME/devmachine"
-shellenv_cache_path="\$cache_path/shellenv_$shell_name.sh"
+DEVMACHINE_CACHE_PATH="$DEVMACHINE_CACHE_PATH"
+
+shellenv_cache_path="\$DEVMACHINE_CACHE_PATH/shellenv_$shell_name.sh"
 
 if [[ -e "\$shellenv_cache_path" ]]; then
   source "\$shellenv_cache_path"
 else
-  mkdir -p "\$cache_path"
+  mkdir -p "\$DEVMACHINE_CACHE_PATH"
 
   tools=""
 
