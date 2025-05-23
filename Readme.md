@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> This project is under active development and I'd love to collab with you on it!
+> If anything here tickles your fancy, email me devmachine@unreasonable-magic.email and I'll send you an invite to a private chat server I have.
+> I also stream me working on this on Twitch here https://twitch.tv/magickeith
+> <3 Keith
+
+
 # devmachine.sh
 
 `devmachine` is a new way of managing tools and dotfiles on your dev machine.
