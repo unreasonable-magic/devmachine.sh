@@ -13,6 +13,9 @@ Devfiles:
   devmachine +installed [ACTION]
   devmachine +notinstalled [ACTION]
 
+Shell:
+  devmachine +bash|+zsh [ARGS]
+
 Setup:
   devmachine +init
   devmachine +adopt PATH

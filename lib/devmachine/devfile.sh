@@ -11,23 +11,43 @@ devfile::list() {
     esac
   done
 
-  for t in "${DEVFILES_PATH}"/*.sh; do
-    # Remove path from the tool name
-    t="${t##*/}"
+  sorted_devfiles=""
+  for devfile in "${DEVFILES_PATH}"/*.sh; do
+    # Cleanup the name by removing the folder and she .sh prefix
+    devfile="${devfile##*/}"
+    devfile="${devfile/.sh/}"
 
-    # Now remove the extension
-    t="${t/.sh/}"
+    local priority="$(devmachine "$devfile" --check-priority)"
+    if [[ "$priority" == "high" ]]; then
+      priority="100"
+    fi
+    sorted_devfiles+="${priority:-0}\t$devfile\n"
+  done
 
+  # Now we have a devfile list like:
+  #
+  #   0   foo
+  #   100 bar
+  #   0   bag
+  #
+  # We want to sort it based on priority so the important stuff
+  # is always at the top
+  sorted_devfiles="$(echo -e "$sorted_devfiles" |
+    sort -k 1,1nr -k2,2 |
+    tr -s '\n' |
+    awk '{print $2}')"
+
+  for devfile in ${sorted_devfiles}; do
     if [[ "$filter" == *installed* ]]; then
-      check=$($DEVMACHINE_PATH/bin/devmachine "$t" --check-installed)
+      check=$($DEVMACHINE_PATH/bin/devmachine "$devfile" --check-installed)
 
       if [[ "$filter" == "installed" && "$check" == "yes" ]]; then
-        echo "$t"
+        echo "$devfile"
       elif [[ "$filter" == "notinstalled" && "$check" == "" ]]; then
-        echo "$t"
+        echo "$devfile"
       fi
     else
-      echo "$t"
+      echo "$devfile"
     fi
   done
 }

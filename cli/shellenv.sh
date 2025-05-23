@@ -9,7 +9,6 @@ if [[ "$shell_cmd" == "" ]]; then
 fi
 
 shell_name="${shell_cmd##*/}"
-
 if [[ "$shell_name" == "" ]]; then
   echo "invalid shell: ${shell_cmd}"
   exit
@@ -32,6 +31,11 @@ fi
 # fi
 
 cat <<- EOF
+
+export DEVMACHINE_PATH="$DEVMACHINE_PATH"
+export DEVMACHINE_CACHE_PATH="$DEVMACHINE_CACHE_PATH"
+export DEVFILES_PATH="$DEVFILES_PATH"
+
 export SHELL='$shell_name'
 
 PATH="\$PATH:$DEVMACHINE_PATH/bin"
@@ -40,7 +44,6 @@ PATH="\$PATH:$DEVMACHINE_PATH/bin"
 
 # __devmachine_init_start=\$date_cmd
 
-DEVMACHINE_CACHE_PATH="$DEVMACHINE_CACHE_PATH"
 
 shellenv_cache_path="\$DEVMACHINE_CACHE_PATH/shellenv_$shell_name.sh"
 
