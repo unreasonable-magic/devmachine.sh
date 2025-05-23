@@ -39,5 +39,7 @@ echo
 if [[ "$input" == "" ]]; then
   "$EDITOR" "${DEVFILES_PATH}/$tool_name.sh"
 else
-  "$DEVMACHINE_PATH/bin/devmachine" "$tool_path" "${commands[$(($input - 1))]}"
+  chosen="${commands[$(($input - 1))]}"
+  ui::logsh "devmachine" "$devfile" "$chosen"
+  "$DEVMACHINE_PATH/bin/devmachine" "$tool_path" "$chosen"
 fi

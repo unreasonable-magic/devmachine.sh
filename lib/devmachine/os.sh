@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 os::sh() {
-  ui::logfunc "os::sh" "$@"
+  ui::logsh "$@"
   eval "$@"
 }
 
@@ -15,13 +15,13 @@ os::install::tool() {
 }
 
 os::install::brew() {
-  export HOMEBREW_NO_INSTALL_UPGRADE=true
-  export HOMEBREW_NO_ENV_HINTS=true
-  brew install "$1" -q
+  os::sh export HOMEBREW_NO_INSTALL_UPGRADE=true
+  os::sh export HOMEBREW_NO_ENV_HINTS=true
+  os::sh brew install "$1" -q
 }
 
 os::install::pacman() {
-  sudo pacman --sync --noconfirm --needed "$1"
+  os::sh sudo pacman --sync --noconfirm --needed "$1"
 }
 
 os::install() {
@@ -43,11 +43,9 @@ os::softdelete() {
   local path="$1"
 
   if stdlib::test::exists "$path"; then
-    timestamp="$(date +%Y%m%d%H%M%S)"
-    new_path="$path.$timestamp.devmachinebackup"
+    new_path="$path.$(date +%Y%m%d%H%M%S).backup"
 
-    mv "$path" "$new_path" &&
-      echo "moved $path to $new_path"
+    os::sh mv "$path" "$new_path"
   fi
 }
 
@@ -73,7 +71,7 @@ os::linkfile() {
   target_dir="$(dirname "$target_link")"
 
   if ! stdlib::test::isdir "$target_dir"; then
-    mkdir -p "$target_dir"
+    os::sh mkdir -p "$target_dir"
   fi
 
   if stdlib::test::exists "$target_link"; then
@@ -84,5 +82,5 @@ os::linkfile() {
     fi
   fi
 
-  ln -fs "$source_file" "$target_link"
+  os::sh ln -fs "$source_file" "$target_link"
 }

@@ -37,9 +37,9 @@ devfile::run() {
   local devfile="${DEVFILE_NAME}"
 
   if [[ "$devfile" == "" ]]; then
-    echo "devfile::run no devfile passed"
-    exit 1
+    stdlib::error::fatal "no devfile passed"
   fi
 
+  ui::logsh "devmachine" "$devfile" "$action"
   "$DEVMACHINE_PATH/bin/devmachine" "$devfile" "$action"
 }
