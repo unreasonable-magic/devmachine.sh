@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 os::sh() {
-  echo "$@"
+  ui::logfunc "os::sh" "$@"
   eval "$@"
 }
 
@@ -58,50 +58,14 @@ os::download() {
   curl -fLo "$path" --silent --create-dirs "$url"
 }
 
-# return the full path to the passed
-# file, following all symlinks along the way
-# if readlink -e . >/dev/null 2>&1; then
-#   os::normalizepath() {
-#     readlink -e "$(realpath $1)"
-#   }
-# else
-#   # Simplified version of https://stackoverflow.com/a/33266819
-#   os::normalizepath() {
-#     local target="$1"
-#     local fname
-#
-#     while :; do
-#       cd "$(dirname -- "$target")"
-#       fname="$(basename -- "$target")"
-#
-#       if [[ -L "$target" ]]; then
-#         target="$(readlink "$fname")"
-#       else
-#         break
-#       fi
-#     done
-#     local targetDir="$(pwd -P)" # Get canonical dir. path
-#
-#     case "$fname" in
-#       .)
-#         printf '%s\n' "${targetDir%/}"
-#         ;;
-#       ..)
-#         printf '%s\n' "$(dirname -- "${targetDir}")"
-#         ;;
-#       *)
-#         printf '%s\n' "${targetDir%/}/$fname"
-#         ;;
-#     esac
-#   }
-# fi
-
 os::linkfile() {
   ui::logfunc "os::linkfile" "$@"
 
   local source_file="$1"
   local target_link="$2"
 
+  # If the file we're trying to link doesn't exist, then something the user has
+  # done is very wrong, so we should error out and stop everything
   if ! stdlib::test::exists "$source_file"; then
     stdlib::error::fatal "$source_file no exist"
   fi
