@@ -43,6 +43,10 @@ if [[ "$#" -ge 1 ]]; then
     if [[ "$2" == "" ]]; then
       source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
     else
+      # Before we run anything inside the devfile, let's switch the working
+      # directory so all OS calls are relative to the devfile, and not the
+      # current location
+      cd "$(dirname "$devfile")"
       source "$devfile" "${@:2}"
     fi
 
