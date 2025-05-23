@@ -27,7 +27,7 @@ Here's how it all works:
 Running `devmachine` will list all the tools installed:
 
 ```
-$ devmachine +ls
+$ devmachine +installed
 bash 5.2.37(1)-release
 bat 0.25.0
 btop btop
@@ -89,6 +89,31 @@ Prety cool!
 That's all it does for now. I haven't run the tooling against my arch linux setup yet, so I'd like to get hyprland and waybar all in here. Then split out the tooling from my config, then I can ship it so everone can use it!
 
 You can use it now if you want, but it's very custom to me.
+
+Here's the CLI:
+
+```
+     _                                 _     _
+  __| | _____   ___ __ ___   __ _  ___| |__ (_)_ __   ___
+ / _` |/ _ \ \ / / '_ ` _ \ / _` |/ __| '_ \| | '_ \ / _ \
+| (_| |  __/\ V /| | | | | | (_| | (__| | | | | | | |  __/
+ \__,_|\___| \_/ |_| |_| |_|\__,_|\___|_| |_|_|_| |_|\___|
+
+Devfiles:
+  devmachine NAME|PATH [ACTION]
+  devmachine +all [ACTION]
+  devmachine +installed [ACTION]
+  devmachine +notinstalled [ACTION]
+
+Setup:
+  devmachine +init
+  devmachine +adopt PATH
+
+Troubleshooting:
+  devmachine +config [KEY]
+  devmachine +help
+  devmachine +version
+```
 
 ## Caching
 

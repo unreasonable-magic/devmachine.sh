@@ -15,6 +15,7 @@ Devfiles:
 
 Setup:
   devmachine +init
+  devmachine +adopt PATH
 
 Troubleshooting:
   devmachine +config [KEY]

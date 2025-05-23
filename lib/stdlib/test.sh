@@ -15,3 +15,7 @@ stdlib::test::isfile() {
 stdlib::test::strblank() {
   [ -z "$1" ]
 }
+
+stdlib::test::iscommand() {
+  command -v "$1" 2>&1 >/dev/null
+}

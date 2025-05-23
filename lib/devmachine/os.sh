@@ -37,6 +37,17 @@ os::install() {
   esac
 }
 
+os::installcheck() {
+  case "$(os::install::tool)" in
+    pacman)
+      pacman -Q "$1" &> /dev/null
+      ;;
+    brew)
+      brew list "$1" &> /dev/null
+      ;;
+  esac
+}
+
 # This function takes a path and returns what it's full absolute version would
 # be. So ~/foo becomes /Users/name/foo, and ./blah becomes "$(PWD)/blah".  We
 # could use realpath mostly for this, but that errors out if the path doesn't

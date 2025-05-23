@@ -2,78 +2,134 @@
 
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
+# Comes up with a "best guess" name for the devfile. It's probably wrong
+# in a bunch of ways, but that's ok, it's just an educated guess.
+#
+# .config/raycast => raycast
+# .config/raycast/config => raycast
+# .config/vim => vim
+# .gitignore => git
+# .gitconfig => git
+# .git/config => git
+# .config/ghostty/config => ghostty
+# .config/ghostty/config => ghostty
+# .irbrc => irb
+# .vimrc => vim
+# .zshrc => vim
+# .zshenv => zsh
+# rspec => rspec
+guess_devfile_name() {
+  local name="$1"
 
-generate_name() {
-  # If the first argument is a directory, use the name of that:
-  #
-  #   +adopt ~/.config/raycast == "raycast"
-  #   +adopt ~/.config/vim == "vim"
-  #
-  if stdlib::test::isdir "$1"; then
-    name="$(basename "$1")"
+  # Let's start by removing boring keys from the end of the string
+  name="${name%.conf}"
+  name="${name%.jsonc}"
+  name="${name%.toml}"
+  name="${name%.json}"
+  name="${name%.yaml}"
+  name="${name%rc}"
+  name="${name%config}"
+  name="${name%ignore}"
+  name="${name%env}"
 
-    # If the name is something boring like "config" then that's not
-    # very useful so we just won't use it
-    if [[ "$name" != *config* ]]; then
-      devfile_name="$name"
-      return
-    fi
-  fi
+  # Remove any trailing / after we've removed boring keys
+  name="${name%/}"
 
-  # If the first argument is a file with (rc) at the end of it,
-  # use the prefix
-  #
-  #   +adopt ~/.vimrc == "vim"
-  #   +adopt ~/.bashrc == "bash"
-  #
-  if stdlib::test::isfile "$1"; then
-    if [[ "$1" =~ rc$ ]]; then
-      # Remove the "rc" from the end
-      devfile_name="$(basename -s "rc" $1)"
+  # Get the last element in the path
+  name="${name##*/}"
 
-      # Remove the "." from the start if there is one
-      devfile_name="${devfile_name#.}"
+  # Remove the "." from the start if there is one
+  name="${name#.}"
 
-      return
-    fi
-  fi
-
-  # If the first file is a file and it has a generic name like
-  # "config" or "env", use it's folder name
-  if stdlib::test::isfile "$1"; then
-    name="$(basename "$1")"
-    if [[ "$name" == *config* || "$name" == *env* ]]; then
-      # Get the path to the directory and get the folder name
-      full_path="$(dirname "$1")"
-      directory_name="${full_path##*/}"
-      devfile_name="${directory_name}"
-
-      # Remove the "." from the start if there is one
-      devfile_name="${devfile_name#.}"
-    fi
-  fi
-
+  echo "$name"
 }
 
-# once we've guessted the name, look into the os::install list to see
-# if a name exists and if it does, use that in install. also peek to see
-# if there's a command with the smae name, and if ther eis, set that up too
+devfile_name="$(guess_devfile_name "$1")"
 
-devfile_name=""
-generate_name "$1"
+# Construct the "os::linkfile" part of the devfile
+link_files=""
+for file in "$@"; do
+  source_file="$devfile_name/$(basename "$file")"
+  target_link="${file/$HOME/\~}"
+  link_files+="os::linkfile \"${source_file}\" \"${target_link}\""
+done
+
+# Put our final devfile together. The code here has whacky indentation
+# because I want the strings to not have indentation when I save them
+# to disk.
+#
+# The 2 main types of devfile here are:
+#
+# 1) There's a package with the same name that's already been installed
+# using a package manager
+#
+# 2) Just rando files
+#
+command_name=""
+if os::installcheck "$devfile_name"; then
+  command_name="${devfile_name}"
+
+body="#!/usr/bin/env devmachine
+
+case \"\$1\" in
+
+  setup)
+    os::install \"$command_name\"
+    ;;
+
+  configure)
+    $link_files
+    ;;
+
+  --check-installed)
+    stdlib::test::iscommand $command_name && echo yes
+    ;;
+
+  --check-version)
+    $command_name --version | head -1 | cut -d ' ' -f 2
+    ;;
+
+esac"
+
+else
 
 body="#!/usr/bin/env devmachine
 
 case \"\$1\" in
 
   configure)
-    $@
+    $link_files
     ;;
 
 esac"
 
-echo "$body"
+fi
 
-read -r -p "Name (default $devfile_name): " devfile_name
+path="$DEVFILES_PATH/${devfile_name}.sh"
 
+# Use `bat` if it's installed to do a nicer render of the preview file
+if stdlib::test::iscommand bat; then
+  echo "$body" | bat --file-name "$path" --language bash
+else
+  echo "File: $path"
+  echo
+  echo "$body" | cat -n
+fi
+
+# Make sure we're good to move
 echo
+read -r -p "Create and move files? (ENTER to continue or CTRL-C to cancel) " confirm
+echo
+
+# Move to all the files
+dest_path="$DEVFILES_PATH/${devfile_name}"
+
+ui::logsh "mkdir" "-p" "$dest_path"
+mkdir -p "$dest_path"
+
+for file in "$@"; do
+  ui::logsh "cp" $(realpath "$file") "${dest_path}/"
+  cp $(realpath "$file") "${dest_path}/"
+done
+
+echo "$body" > "$path"
