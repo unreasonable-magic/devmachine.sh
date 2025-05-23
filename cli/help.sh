@@ -7,9 +7,18 @@ cat <<- 'EOF'
 | (_| |  __/\ V /| | | | | | (_| | (__| | | | | | | |  __/
  \__,_|\___| \_/ |_| |_| |_|\__,_|\___|_| |_|_|_| |_|\___|
 
-Usage: devmachine
+Devfiles:
+  devmachine NAME|PATH [ACTION]
+  devmachine +all [ACTION]
+  devmachine +installed [ACTION]
+  devmachine +notinstalled [ACTION]
 
-Actions:
-  +ls
+Setup:
+  devmachine +init
+
+Troubleshooting:
+  devmachine +config [KEY]
+  devmachine +help
+  devmachine +version
 
 EOF

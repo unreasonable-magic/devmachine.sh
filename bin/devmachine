@@ -63,7 +63,7 @@ cli_path="$DEVMACHINE_PATH/cli"
 case "$action" in
   # Even though our syntax has + as a prefix for action, let's be nice
   # and still support --help and --version
-  --help)
+  --help|"")
     exec "${cli_path}/help.sh"
     ;;
   --version)
