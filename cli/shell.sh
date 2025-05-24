@@ -10,6 +10,10 @@ temp_dir="$(mktemp -d)"
 rc_file_name=".${shell_name}rc"
 temp_rc_file="${temp_dir}/$rc_file_name"
 
+cat >> "$temp_rc_file" << EOF
+HOME="$temp_dir"
+EOF
+
 shell::rcfile "$shell_name" >> "$temp_rc_file"
 
 cat >> "$temp_rc_file" << EOF
