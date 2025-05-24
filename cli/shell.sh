@@ -6,7 +6,7 @@ shell_name="$1"
 shift
 
 # Create a temporary (bash/zsh)rc file and write our env to it
-temp_dir="$(mktemp -d)"
+temp_dir="$(mktemp -d /tmp/devmachine-XXX)"
 rc_file_name=".${shell_name}rc"
 temp_rc_file="${temp_dir}/$rc_file_name"
 
@@ -19,17 +19,17 @@ shell::rcfile "$shell_name" >> "$temp_rc_file"
 cat >> "$temp_rc_file" << EOF
 devmachine_config=\$(devmachine +config)
 
-cat << IOF
-    _                       _    _
- __| |_____ ___ __  __ _ __| |_ (_)_ _  ___
-/ _\\\` / -_) V / '  \/ _\\\` / _| ' \| | ' \/ -_)
-\__,_\___|\_/|_|_|_\__,_\__|_||_|_|_||_\___|
+cat << 'IOF'
+$(ui::banner::small)
 
+IOF
+
+cat << IOF
 \$devmachine_config
 
-Functions:
-  reload # reload current shell
-  editrc # load the rc file in \\\$EDITOR
+$(ui::logsection "Functions")
+reload # reload current shell
+editrc # load the rc file in \\\$EDITOR
 
 IOF
 

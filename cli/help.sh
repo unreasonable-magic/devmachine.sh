@@ -3,7 +3,7 @@
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
 cat <<- EOF
-$(ui::banner:small)
+$(ui::banner::small)
 
 Devfiles:
   devmachine NAME|PATH [ACTION]

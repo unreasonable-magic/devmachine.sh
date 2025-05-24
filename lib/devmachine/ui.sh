@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ui::banner:small() {
+ui::banner::small() {
 color <<- 'EOF'
      _                       _    _
   __| |_____ ___ __  __ _ __| |_ (_)_ _  ___
