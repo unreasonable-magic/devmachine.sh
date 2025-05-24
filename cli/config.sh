@@ -12,7 +12,6 @@ printenv "SHELL"
 printenv "HOME" "$HOME"
 printenv "RCFILE" "$HOME/.${SHELL}rc"
 
-echo
 ui::logsection "XDG"
 
 printenv "XDG_BIN_HOME"
@@ -22,7 +21,6 @@ printenv "XDG_DATA_HOME"
 printenv "XDG_RUNTIME_DIR"
 printenv "XDG_STATE_HOME"
 
-echo
 ui::logsection "Devmachine"
 
 printenv "DEVMACHINE_PATH"
