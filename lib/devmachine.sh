@@ -4,6 +4,7 @@ source "$DEVMACHINE_PATH/lib/stdlib/error.sh"
 source "$DEVMACHINE_PATH/lib/stdlib/test.sh"
 source "$DEVMACHINE_PATH/lib/stdlib/image.sh"
 source "$DEVMACHINE_PATH/lib/stdlib/array.sh"
+source "$DEVMACHINE_PATH/lib/stdlib/color.sh"
 
 source "$DEVMACHINE_PATH/lib/devmachine/version.sh"
 source "$DEVMACHINE_PATH/lib/devmachine/ui.sh"

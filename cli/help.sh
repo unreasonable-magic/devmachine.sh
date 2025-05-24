@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-cat <<- 'EOF'
-     _                                 _     _
-  __| | _____   ___ __ ___   __ _  ___| |__ (_)_ __   ___
- / _` |/ _ \ \ / / '_ ` _ \ / _` |/ __| '_ \| | '_ \ / _ \
-| (_| |  __/\ V /| | | | | | (_| | (__| | | | | | | |  __/
- \__,_|\___| \_/ |_| |_| |_|\__,_|\___|_| |_|_|_| |_|\___|
+source "$DEVMACHINE_PATH/lib/devmachine.sh"
+
+cat <<- EOF
+$(ui::banner:small)
 
 Devfiles:
   devmachine NAME|PATH [ACTION]
