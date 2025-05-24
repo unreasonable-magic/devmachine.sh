@@ -10,6 +10,8 @@ Devfiles:
   devmachine +all [ACTION]
   devmachine +installed [ACTION]
   devmachine +notinstalled [ACTION]
+  devmachine +run ACTION [FILTERS] -- [ARGS]
+  devmachine +ls [FILTERS]
 
 Shell:
   devmachine +shell SHELL [ARGS]

@@ -111,13 +111,18 @@ Devfiles:
   devmachine +all [ACTION]
   devmachine +installed [ACTION]
   devmachine +notinstalled [ACTION]
+  devmachine +run ACTION [FILTERS] -- [ARGS]
+  devmachine +ls [FILTERS]
+
+Shell:
+  devmachine +shell SHELL [ARGS]
 
 Setup:
   devmachine +init
   devmachine +adopt PATH
 
 Troubleshooting:
-  devmachine +config [KEY]
+  devmachine +config
   devmachine +help
   devmachine +version
 ```
