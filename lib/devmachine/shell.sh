@@ -33,15 +33,6 @@ shell::rcfile() {
   buffer+=("PATH=\"\$PATH:\$DEVMACHINE_PATH/bin\"")
   buffer+=("")
 
-  # Add hard coded OS env vars
-  os="$(uname -s)"
-  if [[ "$os" == "Darwin" ]]; then
-    buffer+=("$(cat "$DEVMACHINE_PATH/os/darwin.sh")")
-  elif [[ "$os" == "Linux" ]]; then
-    buffer+=("$(cat "$DEVMACHINE_PATH/os/linux.sh")")
-  fi
-  buffer+=("")
-
   # Loop through each devfile, check if it's installed, and add it to
   # our running devfiles buffer
   for devfile in $(devfile::list --filter installed); do
