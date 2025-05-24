@@ -2,7 +2,7 @@
 
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
-shell_name="$1"
+shell_name="${1:-$SHELL}"
 shift
 
 # Create a temporary (bash/zsh)rc file and write our env to it

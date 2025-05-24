@@ -76,11 +76,6 @@ case "$action" in
     exec "${cli_path}/run.sh" "${1:1}" "${@:2}"
     ;;
 
-  # Just like the above but provide shortcuts for the shell boot gear
-  +bash|+zsh)
-    exec "${cli_path}/shell.sh" "${1:1}" "${@:2}"
-    ;;
-
   *)
     # Strip the "+" from the start and find the matching cli file
     action="${action:1}"

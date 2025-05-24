@@ -12,14 +12,14 @@ Devfiles:
   devmachine +notinstalled [ACTION]
 
 Shell:
-  devmachine +bash|+zsh [ARGS]
+  devmachine +shell SHELL [ARGS]
 
 Setup:
   devmachine +init
   devmachine +adopt PATH
 
 Troubleshooting:
-  devmachine +config [KEY]
+  devmachine +config
   devmachine +help
   devmachine +version
 
