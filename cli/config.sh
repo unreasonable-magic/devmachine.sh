@@ -27,4 +27,5 @@ ui::logsection "Devmachine"
 
 printenv "DEVMACHINE_PATH"
 printenv "DEVMACHINE_VERSION"
+printenv "DEVMACHINE_CACHE_PATH"
 printenv "DEVFILES_PATH"
