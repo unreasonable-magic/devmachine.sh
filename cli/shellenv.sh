@@ -56,11 +56,17 @@ else
 
   # Loop through each tool, check if it's installed, and add it to
   # our running tools buffer
-  for tool_name in "\${DEVFILES_PATH}"/*.sh; do
-    tool_name="\${tool_name##*/}"
+  for tool_path in "\${DEVFILES_PATH}"/*.sh; do
+    tool_name="\${tool_path##*/}"
     tool_name="\${tool_name/.sh/}"
 
-    check=\$(\$DEVMACHINE_PATH/bin/devmachine "\$tool_name" --check-installed)
+    check=""
+    if cat "\$tool_path" | grep "check-installed)" &> /dev/null; then
+      check=\$(\$DEVMACHINE_PATH/bin/devmachine "\$tool_name" --check-installed)
+    else
+      check="yes"
+    fi
+
     if [[ "\$check" == "yes" ]]; then
       priority="\$(devmachine "\$tool_name" --check-priority)"
       if [[ "\$priority" == "high" ]]; then
