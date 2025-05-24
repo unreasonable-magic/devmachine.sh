@@ -7,9 +7,45 @@ shift
 
 # Create a temporary (bash/zsh)rc file and write our env to it
 temp_dir="$(mktemp -d)"
-temp_rc_file="${temp_dir}/.${shell_name}rc"
+rc_file_name=".${shell_name}rc"
+temp_rc_file="${temp_dir}/$rc_file_name"
+
+cat > "$temp_rc_file" << EOF
+cat << 'IOF'
+    _                       _    _
+ __| |_____ ___ __  __ _ __| |_ (_)_ _  ___
+/ _\` / -_) V / '  \/ _\` / _| ' \| | ' \/ -_)
+\__,_\___|\_/|_|_|_\__,_\__|_||_|_|_||_\___|
+
+Shell:
+  SHELL: $shell_name
+  HOME: $temp_dir
+  RCFILE: \$HOME/$rc_file_name
+
+Config:
+  DEVMACHINE_PATH: $DEVMACHINE_PATH
+  DEVMACHINE_VERSION: $DEVMACHINE_VERSION
+  DEVFILES_PATH: $DEVFILES_PATH
+
+Functions:
+  reload # reload current shell
+  editrc # load the rc file in \$EDITOR
+
+IOF
+
+reload() { exec "\$SHELL"; }
+editrc() { "\$EDITOR" "\$HOME/$rc_file_name"; }
+
+HOME="$temp_dir"
+EOF
 
 shell::rcfile "$shell_name" >> "$temp_rc_file"
+
+if [[ "$1" == "rcfile" ]]; then
+  cat "$temp_rc_file"
+  exit
+fi
+
 if [[ "$1" == "--debug" ]]; then
   echo "cat \"$temp_rc_file\"" >> "$temp_rc_file"
 fi
