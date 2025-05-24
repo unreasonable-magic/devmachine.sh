@@ -5,7 +5,11 @@ ui::logfunc() {
 }
 
 ui::logconfig() {
-  printf "\e[1m%s\e[0m: \e[32m%s\e[0m\n" "$1" "$2"
+  printf "%s=\e[0;32m%q\e[0m\n" "$1" "$2"
+}
+
+ui::logsection() {
+  printf "\e[38;5;243m# %s\e[0m\n" "$1"
 }
 
 ui::logsh() {

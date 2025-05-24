@@ -2,20 +2,29 @@
 
 source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
-echo "Shell:"
-ui::logconfig "  SHELL" "$SHELL"
-ui::logconfig "  HOME" "$HOME"
-ui::logconfig "  RCFILE" "$HOME/.${SHELL}rc"
+printenv() {
+  ui::logconfig "$1" "${2:-${!1}}"
+}
+
+ui::logsection "Shell"
+
+printenv "SHELL"
+printenv "HOME" "$HOME"
+printenv "RCFILE" "$HOME/.${SHELL}rc"
+
 echo
-echo "XDG:"
-ui::logconfig "  XDG_BIN_HOME" "${XDG_BIN_HOME/$HOME/~}"
-ui::logconfig "  XDG_CACHE_HOME" "${XDG_CACHE_HOME/$HOME/~}"
-ui::logconfig "  XDG_CONFIG_HOME" "${XDG_CONFIG_HOME/$HOME/~}"
-ui::logconfig "  XDG_DATA_HOME" "${XDG_DATA_HOME/$HOME/~}"
-ui::logconfig "  XDG_RUNTIME_DIR" "${XDG_RUNTIME_DIR/$HOME/~}"
-ui::logconfig "  XDG_STATE_HOME" "${XDG_STATE_HOME/$HOME/~}"
+ui::logsection "XDG"
+
+printenv "XDG_BIN_HOME"
+printenv "XDG_CACHE_HOME"
+printenv "XDG_CONFIG_HOME"
+printenv "XDG_DATA_HOME"
+printenv "XDG_RUNTIME_DIR"
+printenv "XDG_STATE_HOME"
+
 echo
-echo "Config:"
-ui::logconfig "  DEVMACHINE_PATH" "$DEVMACHINE_PATH"
-ui::logconfig "  DEVMACHINE_VERSION" "$DEVMACHINE_VERSION"
-ui::logconfig "  DEVFILES_PATH" "$DEVFILES_PATH"
+ui::logsection "Devmachine"
+
+printenv "DEVMACHINE_PATH"
+printenv "DEVMACHINE_VERSION"
+printenv "DEVFILES_PATH"
