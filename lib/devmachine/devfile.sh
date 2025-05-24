@@ -51,3 +51,20 @@ devfile::list() {
     fi
   done
 }
+
+devfile::actions() {
+  local path="$1"
+
+  # Peeks into the tool file and look for all the
+  # case definitions, i.e. "setup)" "--check-installed" etc.
+  #
+  # It then strips the leading whitespace, as well as the trailing ")"
+  actions=$(
+    cat "$path" |
+      grep --extended-regexp --ignore-case '^\s*[a-z\.\-]+)' |
+      sed -E "s/^ *//g" |
+      sed -E "s/\)$//g"
+    )
+
+  echo "$actions"
+}

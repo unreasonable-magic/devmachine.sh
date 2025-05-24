@@ -3,20 +3,9 @@
 tool_path="$1"
 tool_name="$(basename -s ".sh" "$tool_path")"
 
-# This peeks into the tool file and look for all the
-# case definitions, i.e. "setup)" "--check-installed" etc.
-#
-# It then strips the leading whitespace, as well as the trailing ")"
-discovered_commands=$(
-  cat "$tool_path" |
-    grep --extended-regexp --ignore-case '^\s*[a-z\.\-]+)' |
-    sed -E "s/^ *//g" |
-    sed -E "s/\)$//g"
-)
-
 # Turn the discovered commands into an array
 declare -a commands=()
-for cmd in $discovered_commands; do
+for cmd in $(devfile::actions "$tool_path"); do
   if [[ "$cmd" == "logo" ]]; then
     continue
   fi
@@ -40,6 +29,6 @@ if [[ "$input" == "" ]]; then
   "$EDITOR" "${DEVFILES_PATH}/$tool_name.sh"
 else
   chosen="${commands[$(($input - 1))]}"
-  ui::logsh "devmachine" "$devfile" "$chosen"
+  ui::logsh "devmachine" "$tool_name" "$chosen"
   "$DEVMACHINE_PATH/bin/devmachine" "$tool_path" "$chosen"
 fi
