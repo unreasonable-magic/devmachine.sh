@@ -76,7 +76,7 @@ case "$1" in
     "$EDITOR" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
-  --check-installed)
+  --is-installed)
     command -v ghostty &> /dev/null && echo yes
     ;;
 

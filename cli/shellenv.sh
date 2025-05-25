@@ -54,8 +54,8 @@ else
     tool_name="\${tool_name/.sh/}"
 
     check=""
-    if cat "\$tool_path" | grep "check-installed)" &> /dev/null; then
-      check=\$(\$DEVMACHINE_PATH/bin/devmachine "\$tool_name" --check-installed)
+    if cat "\$tool_path" | grep "is-installed)" &> /dev/null; then
+      check=\$(\$DEVMACHINE_PATH/bin/devmachine "\$tool_name" --is-installed)
     else
       check="yes"
     fi

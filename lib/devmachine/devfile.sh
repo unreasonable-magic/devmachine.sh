@@ -39,7 +39,7 @@ devfile::list() {
 
   for devfile in ${sorted_devfiles}; do
     if [[ "$filter" == *installed* ]]; then
-      check=$($DEVMACHINE_PATH/bin/devmachine "$devfile" --check-installed)
+      check=$($DEVMACHINE_PATH/bin/devmachine "$devfile" --is-installed)
 
       if [[ "$filter" == "installed" && "$check" == "yes" ]]; then
         echo "$devfile"
@@ -56,7 +56,7 @@ devfile::actions() {
   local path="$1"
 
   # Peeks into the tool file and look for all the
-  # case definitions, i.e. "setup)" "--check-installed" etc.
+  # case definitions, i.e. "setup)" "--is-installed" etc.
   #
   # It then strips the leading whitespace, as well as the trailing ")"
   actions=$(

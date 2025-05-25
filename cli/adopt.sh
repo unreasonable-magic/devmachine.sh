@@ -81,8 +81,8 @@ case \"\$1\" in
     $link_files
     ;;
 
-  --check-installed)
-    stdlib::test::iscommand $command_name && echo yes
+  --is-installed)
+    stdlib::test::is_command $command_name && echo yes
     ;;
 
   --check-version)
