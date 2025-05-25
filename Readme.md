@@ -1,3 +1,17 @@
+
+<h1>
+  <p align="center">
+  <img src="/docs/logo.png#gh-dark-mode-only" width="200" />
+  <img src="/docs/logo_light.png#gh-light-mode-only" width="200" />
+</p>
+</h1>
+  <p align="center">
+    Turbocharge your dotfiles with enough juice to make them awesome, but not too much that they get annoying.
+  </p>
+
+
+
+
 > [!IMPORTANT]
 > This project is under active development and I'd love to collab with you on it!
 > If anything here tickles your fancy, email me devmachine@unreasonable-magic.email and I'll send you an invite to a private chat server I have.
