@@ -5,24 +5,24 @@ source "$DEVMACHINE_PATH/lib/devmachine.sh"
 cat <<- EOF
 $(ui::banner::small)
 
-Devfiles:
-  devmachine NAME|PATH [ACTION]
-  devmachine +all [ACTION]
-  devmachine +installed [ACTION]
-  devmachine +notinstalled [ACTION]
-  devmachine +run ACTION [FILTERS] -- [ARGS]
-  devmachine +ls [FILTERS]
+$(ui::logsection "Devfiles")
+devmachine NAME|PATH [ACTION]
+devmachine +all [ACTION]
+devmachine +installed [ACTION]
+devmachine +notinstalled [ACTION]
+devmachine +run ACTION [FILTERS] -- [ARGS]
+devmachine +ls [FILTERS]
 
-Shell:
-  devmachine +shell SHELL [ARGS]
+$(ui::logsection "Shell")
+devmachine +shell SHELL [ARGS]
 
-Setup:
-  devmachine +init
-  devmachine +adopt PATH
+$(ui::logsection "Setup")
+devmachine +init
+devmachine +adopt PATH
 
-Troubleshooting:
-  devmachine +config
-  devmachine +help
-  devmachine +version
+$(ui::logsection "Troubleshooting")
+devmachine +config
+devmachine +help
+devmachine +version
 
 EOF
