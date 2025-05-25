@@ -5,7 +5,7 @@ devicon() {
 
   # Make sure our dev icon cache root dir exists
   local cache_root=""
-  if ! stdlib::test::strblank "$XDG_CACHE_HOME"; then
+  if ! stdlib::test::strempty "$XDG_CACHE_HOME"; then
     cache_root="$XDG_CACHE_HOME/devicons"
   else
     cache_root="$HOME/.devicons"

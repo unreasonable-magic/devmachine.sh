@@ -12,7 +12,7 @@ stdlib::test::isfile() {
   [ -f "$1" ]
 }
 
-stdlib::test::strblank() {
+stdlib::test::strempty() {
   [ -z "$1" ]
 }
 
