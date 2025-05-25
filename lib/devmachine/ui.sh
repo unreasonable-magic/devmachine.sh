@@ -20,23 +20,10 @@ ui::logconfig() {
 ui::logsection() {
   local text="$1"
 
-  local border_char="∿"
-  local border_color="38;5;245"
+  local prefix="\e[38;5;240m#\e[0m"
+  local text_color="38;5;4"
 
-  local border_h=""
-  printf -v border_h "%*s" $((${#text} + 4))
-  border_h="${border_h// /$border_char}"
-  border_h="\e[${border_color}m${border_h}\e[0m"
-
-  local border_v="${border_char}"
-  border_v="\e[${border_color}m${border_v}\e[0m"
-
-  local prefix="\e[38;5;238m#\e[0m"
-  local text_color="38;5;248"
-
-  printf "$prefix ${border_h} \e[0m\n"
-  printf "$prefix ${border_v} \e[${text_color}m%s\e[0m ${border_v} \e[0m\n" "$text"
-  printf "$prefix ${border_h} \e[0m\n"
+  printf "$prefix \e[${text_color}m%s\e[0m\n" "$text"
 }
 
 ui::logsh() {
