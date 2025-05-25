@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
+# Prints an error to stderr then exits
 stdlib::error::fatal() {
-  echo "$1"
+  printf "$(basename "$0"): $1\n" "${@:2}" >&2
   exit 1
 }

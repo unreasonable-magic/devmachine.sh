@@ -30,8 +30,7 @@ if [[ "$#" -ge 1 ]]; then
       devfile="$DEVFILES_PATH/${devfile%\.sh}.sh"
 
       if ! stdlib::test::exists "$devfile"; then
-        echo "no dev file $devfile"
-        exit 1
+        stdlib::error::fatal "no devfile %s" "$devfile"
       fi
     fi
 
