@@ -105,7 +105,7 @@ os::linkfile() {
 
   target_dir="$(dirname "$target_link")"
 
-  if ! stdlib::test::isdir "$target_dir"; then
+  if ! stdlib::test::is_dir "$target_dir"; then
     os::sh mkdir -p "$target_dir"
   fi
 

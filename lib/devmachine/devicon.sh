@@ -15,7 +15,7 @@ devicon() {
   # Now see if the icon we want exists. If it's not already on the filesystem,
   # download it, then show it
   icon_path="${cache_root}/${icon}.ansi"
-  if ! stdlib::test::isfile "${icon_path}"; then
+  if ! stdlib::test::is_file "${icon_path}"; then
     url="https://raw.githubusercontent.com/keithpitt/devicons.sh/refs/heads/main/icons/${icon}/${icon}.ansi"
     curl -fLo "$icon_path" --silent --create-dirs "$url"
   fi
