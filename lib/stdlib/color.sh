@@ -7,7 +7,7 @@ stdlib::color() {
 }
 
 stdlib::color::rainbow() {
-  if stdlib::test::iscommand "lolcat"; then
+  if stdlib::test::is_command "lolcat"; then
     lolcat -f
   else
     while IFS= read -r line; do
