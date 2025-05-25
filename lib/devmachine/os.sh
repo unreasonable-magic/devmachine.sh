@@ -15,6 +15,7 @@ os::install::tool() {
 }
 
 os::install::brew() {
+  os::sh export HOMEBREW_NO_AUTO_UPDATE=true
   os::sh export HOMEBREW_NO_INSTALL_UPGRADE=true
   os::sh export HOMEBREW_NO_ENV_HINTS=true
   os::sh brew install "$1" -q
