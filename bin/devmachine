@@ -83,8 +83,7 @@ case "$action" in
     if stdlib::test::exists "$cli_file"; then
       exec "${cli_file}" "${@:2}"
     else
-      echo "devmachine: unknown command $action"
-      exit
+      stdlib::error::fatal "unknown command $action"
     fi
     ;;
 esac
