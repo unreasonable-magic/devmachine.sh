@@ -86,8 +86,10 @@ os::softdelete() {
 }
 
 os::download() {
+  ui::logfunc "os::download" "$@"
+
   local url="$1"
-  local path="$1"
+  local path="${2:-.}"
 
   curl -fLo "$path" --silent --create-dirs "$url"
 }
