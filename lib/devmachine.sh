@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-source "error.sh"
-source "test.sh"
-source "image.sh"
-source "array.sh"
-source "color.sh"
+eval "$(stdlib shellenv)"
+
+stdlib::require "stdlib.sh/error.sh"
+stdlib::require "stdlib.sh/test.sh"
+stdlib::require "stdlib.sh/image.sh"
+stdlib::require "stdlib.sh/array.sh"
+stdlib::require "stdlib.sh/color.sh"
 
 source "$DEVMACHINE_PATH/lib/devmachine/version.sh"
 source "$DEVMACHINE_PATH/lib/devmachine/ui.sh"
