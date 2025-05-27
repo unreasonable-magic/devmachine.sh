@@ -103,7 +103,7 @@ os::linkfile() {
   # If the file we're trying to link doesn't exist, then something the user has
   # done is very wrong, so we should error out and stop everything
   if ! stdlib::test::exists "$source_file"; then
-    stdlib::error::fatal "$source_file no exist"
+    stdlib::error::fatal "source file $source_file no exist"
   fi
 
   target_dir="$(dirname "$target_link")"

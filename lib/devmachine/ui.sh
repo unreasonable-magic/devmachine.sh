@@ -21,7 +21,6 @@ ui::logsection() {
   local text="$1"
 
   local prefix="\e[38;5;240m#\e[0m"
-  local text_color="38;5;4"
 
   printf "$prefix ${COLOR_FG_BLUE}%s\e[0m\n" "$text"
 }
