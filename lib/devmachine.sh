@@ -8,6 +8,7 @@ stdlib::require "stdlib.sh/image"
 stdlib::require "stdlib.sh/array"
 stdlib::require "stdlib.sh/color"
 stdlib::require "stdlib.sh/debugger"
+stdlib::require "stdlib.sh/url"
 
 source "$DEVMACHINE_PATH/lib/devmachine/version.sh"
 source "$DEVMACHINE_PATH/lib/devmachine/ui.sh"

@@ -13,6 +13,10 @@ ui::logfunc() {
   printf "\e[0m%s\e[0m \e[32m%s\e[0m\n" "$1" "${*:2}"
 }
 
+ui::loginfo() {
+  printf "$1\n" "${@:2}"
+}
+
 ui::logconfig() {
   printf "%s=\e[0;32m%q\e[0m\n" "$1" "$2"
 }

@@ -89,9 +89,33 @@ os::download() {
   ui::logfunc "os::download" "$@"
 
   local url="$1"
-  local path="${2:-.}"
+  local destination="${2:-.}"
 
-  curl -fLo "$path" --silent --create-dirs "$url"
+  local host=$(stdlib::url::parse "$url" --host)
+  if [[ "$host" == "github.com" ]]; then
+    local path=$(stdlib::url::parse "$url" --path)
+    if [[ "$path" == *"releases/latest" ]]; then
+      # local org_and_repo="${path/\/releases\/latest/}"
+      local latest_release_url=$(stdlib::url::join "https://api.github.com/repos/" "$path")
+      latest_release_json=$(curl -s "$latest_release_url")
+
+      local asset_search_pattern=$(stdlib::url::parse "$url" --fragment)
+      if [[ "$asset_search_pattern" == "" ]]; then
+        stdlib::error::fatal "no asset pattern passed in anchor"
+      else
+        url=$(
+          echo -E $latest_release_json |
+            jq --raw-output --arg pattern "$asset_search_pattern" '.assets[] | select(.name | test($pattern; "i")) | .browser_download_url'
+          )
+
+        ui::loginfo "rewrote download url to %s" "$url"
+      fi
+    else
+      stdlib::error::fatal "not sure how to download this %s" "$url"
+    fi
+  fi
+
+  curl -fLo "$destination" --create-dirs "$url"
 }
 
 os::linkfile() {
