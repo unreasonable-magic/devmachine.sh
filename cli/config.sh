@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
-
 printenv() {
   ui::logconfig "$1" "${2:-${!1}}"
 }

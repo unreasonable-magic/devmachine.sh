@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
-
 # Comes up with a "best guess" name for the devfile. It's probably wrong
 # in a bunch of ways, but that's ok, it's just an educated guess.
 #

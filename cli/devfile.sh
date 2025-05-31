@@ -13,7 +13,7 @@ for cmd in $(devfile::actions "$tool_path"); do
   commands+=("$cmd")
 done
 
-source "$tool_path" "logo"
+stdlib::source "$tool_path" "logo"
 
 declare -i idx=1
 for cmd in ${commands[@]}; do

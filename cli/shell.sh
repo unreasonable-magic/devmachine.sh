@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
-
 shell_name="${1:-$SHELL}"
 shift
 

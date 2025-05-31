@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
-
 filter="$1"
 args="${@:2}"
 

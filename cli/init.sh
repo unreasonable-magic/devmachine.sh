@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
-
 # Start out by making sure we've got a shell we should be looking
 # to take over
 target_shell="${1:-$SHELL}"

@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
+eval "$(stdlib shellenv)"
+
+stdlib::import "error"
+stdlib::import "test"
+stdlib::import "image"
+stdlib::import "array"
+stdlib::import "color"
+stdlib::import "debugger"
+stdlib::import "url"
+stdlib::import "source"
+
 export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
-source "$DEVMACHINE_PATH/lib/devmachine.sh"
+stdlib::source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
 # This CLI can be run in either 2 "modes":
 #
@@ -36,7 +47,7 @@ if [[ "$#" -ge 1 ]]; then
 
     # Now that we have our devfile, let's run it
     if [[ "$2" == "" ]]; then
-      source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
+      stdlib::source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
     else
       # Provide a shortcut to devfiles to run a task from inside
       # itself
@@ -49,7 +60,7 @@ if [[ "$#" -ge 1 ]]; then
       # directory so all OS calls are relative to the devfile, and not the
       # current location
       cd "$(dirname "$devfile")"
-      source "$devfile" "${@:2}"
+      stdlib::source "$devfile" "${@:2}"
     fi
 
     exit
@@ -63,16 +74,16 @@ case "$action" in
   # Even though our syntax has + as a prefix for action, let's be nice
   # and still support --help and --version
   --help|"")
-    exec "${cli_path}/help.sh"
+    stdlib::source "${cli_path}/help.sh"
     ;;
   --version)
-    exec "${cli_path}/version.sh"
+    stdlib::source "${cli_path}/version.sh"
     ;;
 
   # You can technically run `devmachine +run installed configure`, but this just
   # adds a bit of sugar so you can go directly to `devmachine +all`
   +installed|+notinstalled|+all)
-    exec "${cli_path}/run.sh" "${1:1}" "${@:2}"
+    stdlib::source "${cli_path}/run.sh" "${1:1}" "${@:2}"
     ;;
 
   *)
@@ -81,7 +92,7 @@ case "$action" in
     cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
 
     if stdlib::test::exists "$cli_file"; then
-      exec "${cli_file}" "${@:2}"
+      stdlib::source "${cli_file}" "${@:2}"
     else
       stdlib::error::fatal "unknown command $action"
     fi
