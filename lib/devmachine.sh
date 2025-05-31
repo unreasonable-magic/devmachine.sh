@@ -2,13 +2,13 @@
 
 eval "$(stdlib shellenv)"
 
-stdlib::require "stdlib.sh/error.sh"
-stdlib::require "stdlib.sh/test"
-stdlib::require "stdlib.sh/image"
-stdlib::require "stdlib.sh/array"
-stdlib::require "stdlib.sh/color"
-stdlib::require "stdlib.sh/debugger"
-stdlib::require "stdlib.sh/url"
+stdlib::import "error"
+stdlib::import "test"
+stdlib::import "image"
+stdlib::import "array"
+stdlib::import "color"
+stdlib::import "debugger"
+stdlib::import "url"
 
 source "$DEVMACHINE_PATH/lib/devmachine/version.sh"
 source "$DEVMACHINE_PATH/lib/devmachine/ui.sh"
