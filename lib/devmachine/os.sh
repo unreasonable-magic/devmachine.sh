@@ -99,19 +99,24 @@ os::download() {
       local latest_release_url=$(stdlib::url::join "https://api.github.com/repos/" "$path")
       latest_release_json=$(curl -s "$latest_release_url")
 
-      local asset_search_pattern=$(stdlib::url::parse "$url" --fragment)
+      local asset_search_pattern
+      asset_search_pattern=$(stdlib::url::parse "$url" --fragment)
+
       if [[ "$asset_search_pattern" == "" ]]; then
-        stdlib::error::fatal "no asset pattern passed in anchor"
-      else
-        url=$(
-          echo -E $latest_release_json |
-            jq --raw-output --arg pattern "$asset_search_pattern" '.assets[] | select(.name | test($pattern; "i")) | .browser_download_url'
-          )
+        asset_search_pattern="$(uname -ms)"
+        asset_search_pattern=$(stdlib::string::underscore "${asset_search_pattern}")
+        asset_search_pattern=$(stdlib::string::downcase "${asset_search_pattern}")
+        ui::loginfo "no asset search anchor was passed, guessing with ${asset_search_pattern}"
+      fi
+
+      url=$(
+        echo -E $latest_release_json |
+          jq --raw-output --arg pattern "$asset_search_pattern" '.assets[] | select(.name | test($pattern; "i")) | .browser_download_url'
+        )
 
         ui::loginfo "rewrote download url to %s" "$url"
-      fi
-    else
-      stdlib::error::fatal "not sure how to download this %s" "$url"
+      else
+        stdlib::error::fatal "not sure how to download this %s" "$url"
     fi
   fi
 
