@@ -4,7 +4,7 @@ filter="$1"
 args="${@:2}"
 
 for name in $(devfile::list --filter $filter); do
-  ui::logsection "$name"
+  ui::logsection "$name" "$(os::detect "$name")"
 
   if [[ "$args" != "" ]]; then
     devmachine "$name" "$args"

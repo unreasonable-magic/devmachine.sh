@@ -23,10 +23,17 @@ ui::logconfig() {
 
 ui::logsection() {
   local text="$1"
+  local extra="$2"
 
   local prefix="\e[38;5;240m#\e[0m"
 
-  printf "$prefix ${COLOR_FG_BLUE}%s\e[0m\n" "$text"
+  printf "$prefix ${COLOR_FG_BLUE}%s\e[0m" "$text"
+
+  if [[ -n "$extra" ]]; then
+    printf " ${COLOR_FG_YELLOW}%s\e[0m" "$extra"
+  fi
+
+  printf "\n"
 }
 
 ui::logsh() {
