@@ -94,10 +94,6 @@ case "$1" in
     command -v ghostty &> /dev/null && echo yes
     ;;
 
-  --check-version)
-    ghostty --version | head -n 1 | sed 's/Ghostty //'
-    ;;
-
 esac
 ```
 

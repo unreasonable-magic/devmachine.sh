@@ -83,10 +83,6 @@ case \"\$1\" in
     stdlib::test::is_command $command_name && echo yes
     ;;
 
-  --check-version)
-    $command_name --version | head -1 | cut -d ' ' -f 2
-    ;;
-
 esac"
 
 else
