@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cat <<- EOF
+cat <<-EOF
 $(ui::banner::small)
 
 $(ui::logsection "Devfiles")
@@ -10,6 +10,9 @@ devmachine +installed [ACTION]
 devmachine +notinstalled [ACTION]
 devmachine +run ACTION [FILTERS] -- [ARGS]
 devmachine +ls [FILTERS]
+
+$(ui::logsection "Operating System")
+devmachine +check COMMAND_NAME [ARGS]
 
 $(ui::logsection "Shell")
 devmachine +shell SHELL [ARGS]
