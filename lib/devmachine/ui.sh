@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ui::banner::small() {
-stdlib::color::rainbow -f <<- 'EOF'
+  stdlib::color::rainbow -f <<-'EOF'
      _                       _    _
   __| |_____ ___ __  __ _ __| |_ (_)_ _  ___
  / _` / -_) V / '  \/ _` / _| ' \| | ' \/ -_)
@@ -38,4 +38,8 @@ ui::logsection() {
 
 ui::logsh() {
   printf "\e[2m$ %s\e[0m \e[2m%s\e[0m\n" "$1" "${*:2}"
+}
+
+ui::logerror() {
+  printf "${COLOR_FG_RED}error:\e[0m %s\n" "$1" >&2
 }

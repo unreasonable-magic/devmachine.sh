@@ -71,30 +71,30 @@ action="$1"
 cli_path="$DEVMACHINE_PATH/cli"
 
 case "$action" in
-  # Even though our syntax has + as a prefix for action, let's be nice
-  # and still support --help and --version
-  --help|"")
-    stdlib::source "${cli_path}/help.sh"
-    ;;
-  --version)
-    stdlib::source "${cli_path}/version.sh"
-    ;;
+# Even though our syntax has + as a prefix for action, let's be nice
+# and still support --help and --version
+--help | "")
+  stdlib::source "${cli_path}/help.sh"
+  ;;
+--version)
+  stdlib::source "${cli_path}/version.sh"
+  ;;
 
-  # You can technically run `devmachine +run installed configure`, but this just
-  # adds a bit of sugar so you can go directly to `devmachine +all`
-  +installed|+notinstalled|+all)
-    stdlib::source "${cli_path}/run.sh" "${1:1}" "${@:2}"
-    ;;
+# You can technically run `devmachine +run installed configure`, but this just
+# adds a bit of sugar so you can go directly to `devmachine +all`
++installed | +notinstalled | +all)
+  stdlib::source "${cli_path}/run.sh" "${1:1}" "${@:2}"
+  ;;
 
-  *)
-    # Strip the "+" from the start and find the matching cli file
-    action="${action:1}"
-    cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
+*)
+  # Strip the "+" from the start and find the matching cli file
+  action="${action:1}"
+  cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
 
-    if stdlib::test::exists "$cli_file"; then
-      stdlib::source "${cli_file}" "${@:2}"
-    else
-      stdlib::error::fatal "unknown command $action"
-    fi
-    ;;
+  if stdlib::test::exists "$cli_file"; then
+    stdlib::source "${cli_file}" "${@:2}"
+  else
+    stdlib::error::fatal "unknown command $action"
+  fi
+  ;;
 esac
