@@ -91,16 +91,16 @@ os::download() {
   local url="$1"
   local destination="${2:-.}"
 
-  local host=$(stdlib::url::parse "$url" --host)
+  local host=$(urlparse "$url" --host)
   if [[ "$host" == "github.com" ]]; then
-    local path=$(stdlib::url::parse "$url" --path)
+    local path=$(urlparse "$url" --path)
     if [[ "$path" == *"releases/latest" ]]; then
       # local org_and_repo="${path/\/releases\/latest/}"
-      local latest_release_url=$(stdlib::url::join "https://api.github.com/repos/" "$path")
+      local latest_release_url=$(urljoin "https://api.github.com/repos/" "$path")
       latest_release_json=$(curl -s "$latest_release_url")
 
       local asset_search_pattern
-      asset_search_pattern=$(stdlib::url::parse "$url" --fragment)
+      asset_search_pattern=$(urlparse "$url" --fragment)
 
       if [[ "$asset_search_pattern" == "" ]]; then
         asset_search_pattern="$(uname -ms)"

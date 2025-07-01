@@ -8,7 +8,8 @@ stdlib::import "image"
 stdlib::import "array"
 stdlib::import "color"
 stdlib::import "debugger"
-stdlib::import "url"
+stdlib::import "url/parse"
+stdlib::import "url/join"
 stdlib::import "source"
 
 export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
