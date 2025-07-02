@@ -2,6 +2,12 @@
 
 eval "$(stdlib shellenv)"
 
+stdlib::import "log"
+log_init
+if [[ "$DEBUG" == "true" ]]; then
+  log_set_level "$LOG_LEVEL_DEBUG"
+fi
+
 stdlib::import "error"
 stdlib::import "test"
 stdlib::import "image"

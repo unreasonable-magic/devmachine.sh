@@ -1,6 +1,7 @@
 DETECT_INVALID_ARGS_ERROR=1
 DETECT_COMMAND_NOT_FOUND_ERROR=166
 
+stdlib::import "log"
 stdlib::import "test"
 stdlib::import "string/titleize"
 stdlib::import "string/trim"
@@ -8,15 +9,15 @@ stdlib::import "string/trim"
 os::detect_installed() {
   local command_name="$1"
 
+  log_debug "checking for ${command_name}"
+
   if [ -z "$command_name" ]; then
     return $DETECT_INVALID_ARGS_ERROR
   fi
 
   # Get the full path of the command, ignoring any aliases
   local command_path
-  command_path="$(which "$command_name")"
-
-  if [ ! -f "$command_path" ]; then
+  if ! command_path="$(which "$command_name")"; then
     # If it's not a CLI command, maybe it's a macOS app and we can sneak into
     # the plist and grab a version from that? (this is for things like chrome,
     # firefox, alacritty, etc.)
@@ -24,6 +25,9 @@ os::detect_installed() {
     titleize -v app_name "${command_name}"
 
     local macos_app="/Applications/${app_name}.app/Contents/Info.plist"
+    log_debug "${command_name} not found on \$PATH"
+    log_debug "checking for ${macos_app}"
+
     if stdlib::test::is_file "$macos_app"; then
       grep "CFBundleShortVersionString" -A 1 "$macos_app" | tail -n 1 | sed -Er "s/[a-zA-Z<>\/ ]+//g" | trim
       return 0
@@ -46,7 +50,8 @@ os::detect_installed() {
   for flag in "${possible_version_flags[@]}"; do
     local found_version_text=""
 
-    # ui::logsh "$command_path" "$flag"
+    log_debug "\$ ${command_path} ${flag}"
+
     if version_output=$("$command_path" "$flag" 2>&1); then
       found_version_text=$(
         echo "$version_output" |
