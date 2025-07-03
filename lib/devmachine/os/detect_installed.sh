@@ -1,10 +1,10 @@
 DETECT_INVALID_ARGS_ERROR=1
 DETECT_COMMAND_NOT_FOUND_ERROR=166
 
-stdlib::import "log"
-stdlib::import "test"
-stdlib::import "string/titleize"
-stdlib::import "string/trim"
+stdlib_import "log"
+stdlib_import "test"
+stdlib_import "string/titleize"
+stdlib_import "string/trim"
 
 os::detect_installed() {
   local command_name="$1"
@@ -28,7 +28,7 @@ os::detect_installed() {
     log_debug "${command_name} not found on \$PATH"
     log_debug "checking for ${macos_app}"
 
-    if stdlib::test::is_file "$macos_app"; then
+    if stdlib_test_is_file "$macos_app"; then
       grep "CFBundleShortVersionString" -A 1 "$macos_app" | tail -n 1 | sed -Er "s/[a-zA-Z<>\/ ]+//g" | trim
       return 0
     fi

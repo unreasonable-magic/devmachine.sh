@@ -102,7 +102,7 @@ fi
 path="$DEVFILES_PATH/${devfile_name}.sh"
 
 # Use `bat` if it's installed to do a nicer render of the preview file
-if stdlib::test::iscommand bat; then
+if stdlib_test_iscommand bat; then
   echo "$body" | bat --file-name "$path" --language bash
 else
   echo "File: $path"

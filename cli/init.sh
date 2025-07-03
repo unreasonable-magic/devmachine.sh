@@ -3,7 +3,7 @@
 # Start out by making sure we've got a shell we should be looking
 # to take over
 target_shell="${1:-$SHELL}"
-[ -z "$target_shell" ] && stdlib::error::fatal "no shell passed"
+[ -z "$target_shell" ] && stdlib_error_fatal "no shell passed"
 
 rc_file=""
 if [[ "$target_shell" == "zsh" ]]; then
@@ -11,7 +11,7 @@ if [[ "$target_shell" == "zsh" ]]; then
 elif [[ "$target_shell" == "bash" ]]; then
   rc_file="$HOME/.bashrc"
 else
-  stdlib::error::fatal "unsupported shell $target_shell"
+  stdlib_error_fatal "unsupported shell $target_shell"
 fi
 
 printf -v new_rc_body "export DEVMACHINE_PATH=\'%q\'\neval \"\$(\$DEVMACHINE_PATH/bin/devmachine +shellenv \$(which \${0#-}))\"" $DEVMACHINE_PATH

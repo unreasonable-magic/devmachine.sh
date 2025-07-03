@@ -11,7 +11,7 @@ shell::rcfile() {
         debug="$arg"
         ;;
       *)
-        stdlib::error::fatal "unsupported option $arg"
+        stdlib_error_fatal "unsupported option $arg"
         ;;
     esac
   done
@@ -44,5 +44,5 @@ shell::rcfile() {
 
   buffer+=("devmachine $shell_name motd")
 
-  stdlib::array::join "\n" "${buffer[@]}"
+  stdlib_array_join "\n" "${buffer[@]}"
 }

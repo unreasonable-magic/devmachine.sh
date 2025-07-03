@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-stdlib::import "capture"
+stdlib_import "capture"
 
 if [[ $# -eq 0 ]]; then
   ui::logerror "+checkinstalled requires at least 1 argument"

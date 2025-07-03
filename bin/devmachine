@@ -2,24 +2,24 @@
 
 eval "$(stdlib shellenv)"
 
-stdlib::import "log"
+stdlib_import "log"
 log_init
 if [[ "$DEBUG" == "true" ]]; then
   log_set_level "$LOG_LEVEL_DEBUG"
 fi
 
-stdlib::import "error"
-stdlib::import "test"
-stdlib::import "image"
-stdlib::import "array"
-stdlib::import "color"
-stdlib::import "debugger"
-stdlib::import "url/parse"
-stdlib::import "url/join"
-stdlib::import "source"
+stdlib_import "error"
+stdlib_import "test"
+stdlib_import "image"
+stdlib_import "array"
+stdlib_import "color"
+stdlib_import "debugger"
+stdlib_import "url/parse"
+stdlib_import "url/join"
+stdlib_import "source"
 
 export DEVMACHINE_PATH=$(realpath "$(dirname "$0")/..")
-stdlib::source "$DEVMACHINE_PATH/lib/devmachine.sh"
+stdlib_source "$DEVMACHINE_PATH/lib/devmachine.sh"
 
 # This CLI can be run in either 2 "modes":
 #
@@ -44,17 +44,17 @@ if [[ "$#" -ge 1 ]]; then
     #
     # If it is, then we can just use that as the path, otherwise we'll
     # make up a path using DEVFILES_PATH
-    if ! stdlib::test::is_file "$devfile"; then
+    if ! stdlib_test_is_file "$devfile"; then
       devfile="$DEVFILES_PATH/${devfile%\.sh}.sh"
 
-      if ! stdlib::test::exists "$devfile"; then
-        stdlib::error::fatal "no devfile %s" "$devfile"
+      if ! stdlib_test_exists "$devfile"; then
+        stdlib_error_fatal "no devfile %s" "$devfile"
       fi
     fi
 
     # Now that we have our devfile, let's run it
     if [[ "$2" == "" ]]; then
-      stdlib::source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
+      stdlib_source "$DEVMACHINE_PATH/cli/devfile.sh" "${devfile}"
     else
       # Provide a shortcut to devfiles to run a task from inside
       # itself
@@ -67,7 +67,7 @@ if [[ "$#" -ge 1 ]]; then
       # directory so all OS calls are relative to the devfile, and not the
       # current location
       cd "$(dirname "$devfile")"
-      stdlib::source "$devfile" "${@:2}"
+      stdlib_source "$devfile" "${@:2}"
     fi
 
     exit
@@ -81,16 +81,16 @@ case "$action" in
 # Even though our syntax has + as a prefix for action, let's be nice
 # and still support --help and --version
 --help | "")
-  stdlib::source "${cli_path}/help.sh"
+  stdlib_source "${cli_path}/help.sh"
   ;;
 --version)
-  stdlib::source "${cli_path}/version.sh"
+  stdlib_source "${cli_path}/version.sh"
   ;;
 
 # You can technically run `devmachine +run installed configure`, but this just
 # adds a bit of sugar so you can go directly to `devmachine +all`
 +installed | +notinstalled | +all)
-  stdlib::source "${cli_path}/run.sh" "${1:1}" "${@:2}"
+  stdlib_source "${cli_path}/run.sh" "${1:1}" "${@:2}"
   ;;
 
 *)
@@ -98,10 +98,10 @@ case "$action" in
   action="${action:1}"
   cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
 
-  if stdlib::test::exists "$cli_file"; then
-    stdlib::source "${cli_file}" "${@:2}"
+  if stdlib_test_exists "$cli_file"; then
+    stdlib_source "${cli_file}" "${@:2}"
   else
-    stdlib::error::fatal "unknown command $action"
+    stdlib_error_fatal "unknown command $action"
   fi
   ;;
 esac

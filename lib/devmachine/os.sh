@@ -104,8 +104,8 @@ os::download() {
 
       if [[ "$asset_search_pattern" == "" ]]; then
         asset_search_pattern="$(uname -ms)"
-        asset_search_pattern=$(stdlib::string::underscore "${asset_search_pattern}")
-        asset_search_pattern=$(stdlib::string::downcase "${asset_search_pattern}")
+        asset_search_pattern=$(stdlib_string_underscore "${asset_search_pattern}")
+        asset_search_pattern=$(stdlib_string_downcase "${asset_search_pattern}")
         ui::loginfo "no asset search anchor was passed, guessing with ${asset_search_pattern}"
       fi
 
@@ -116,7 +116,7 @@ os::download() {
 
         ui::loginfo "rewrote download url to %s" "$url"
       else
-        stdlib::error::fatal "not sure how to download this %s" "$url"
+        stdlib_error_fatal "not sure how to download this %s" "$url"
     fi
   fi
 
@@ -131,17 +131,17 @@ os::linkfile() {
 
   # If the file we're trying to link doesn't exist, then something the user has
   # done is very wrong, so we should error out and stop everything
-  if ! stdlib::test::exists "$source_file"; then
-    stdlib::error::fatal "source file $source_file no exist"
+  if ! stdlib_test_exists "$source_file"; then
+    stdlib_error_fatal "source file $source_file no exist"
   fi
 
   target_dir="$(dirname "$target_link")"
 
-  if ! stdlib::test::is_dir "$target_dir"; then
+  if ! stdlib_test_is_dir "$target_dir"; then
     os::sh mkdir -p "$target_dir"
   fi
 
-  if stdlib::test::exists "$target_link"; then
+  if stdlib_test_exists "$target_link"; then
     if [[ "$(realpath $source_file)" == "$(realpath $target_link)" ]]; then
       return
     else

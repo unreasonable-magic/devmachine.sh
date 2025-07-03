@@ -56,6 +56,6 @@ case $shell_name in
     exec zsh
     ;;
   *)
-    stdlib::error::fatal "unsupported shell $shell_name"
+    stdlib_error_fatal "unsupported shell $shell_name"
     ;;
 esac
