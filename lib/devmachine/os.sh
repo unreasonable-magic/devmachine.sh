@@ -78,7 +78,7 @@ os::softdelete() {
 
   local path="$(os::expandpath "$1")"
 
-  if stdlib::test::exists "$path"; then
+  if stdlib_test_exists "$path"; then
     new_path="$path.$(date +%Y%m%d%H%M%S).backup"
 
     os::sh mv "$path" "$new_path"
