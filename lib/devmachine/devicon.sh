@@ -5,7 +5,7 @@ devicon() {
 
   # Make sure our dev icon cache root dir exists
   local cache_root=""
-  if ! stdlib_test_strempty "$XDG_CACHE_HOME"; then
+  if ! stdlib_test string/is_empty "$XDG_CACHE_HOME"; then
     cache_root="$XDG_CACHE_HOME/devicons"
   else
     cache_root="$HOME/.devicons"
@@ -15,7 +15,7 @@ devicon() {
   # Now see if the icon we want exists. If it's not already on the filesystem,
   # download it, then show it
   icon_path="${cache_root}/${icon}.ansi"
-  if ! stdlib_test_is_file "${icon_path}"; then
+  if ! stdlib_test file/is_regular "${icon_path}"; then
     url="https://raw.githubusercontent.com/keithpitt/devicons.sh/refs/heads/main/icons/${icon}/${icon}.ansi"
     curl -fLo "$icon_path" --silent --create-dirs "$url"
   fi

@@ -67,7 +67,7 @@ command_name=""
 if os::installcheck "$devfile_name"; then
   command_name="${devfile_name}"
 
-body="#!/usr/bin/env devmachine
+  body="#!/usr/bin/env devmachine
 
 case \"\$1\" in
 
@@ -80,14 +80,14 @@ case \"\$1\" in
     ;;
 
   --is-installed)
-    stdlib_test_is_command $command_name && echo yes
+    stdlib_test command/exists $command_name && echo yes
     ;;
 
 esac"
 
 else
 
-body="#!/usr/bin/env devmachine
+  body="#!/usr/bin/env devmachine
 
 case \"\$1\" in
 
@@ -102,7 +102,7 @@ fi
 path="$DEVFILES_PATH/${devfile_name}.sh"
 
 # Use `bat` if it's installed to do a nicer render of the preview file
-if stdlib_test_iscommand bat; then
+if stdlib_test is_command bat; then
   echo "$body" | bat --file-name "$path" --language bash
 else
   echo "File: $path"
@@ -126,4 +126,4 @@ for file in "$@"; do
   cp $(realpath "$file") "${dest_path}/"
 done
 
-echo "$body" > "$path"
+echo "$body" >"$path"

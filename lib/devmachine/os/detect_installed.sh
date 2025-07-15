@@ -28,7 +28,7 @@ os::detect_installed() {
     log_debug "${command_name} not found on \$PATH"
     log_debug "checking for ${macos_app}"
 
-    if stdlib_test_is_file "$macos_app"; then
+    if stdlib_test file/is_regular "$macos_app"; then
       grep "CFBundleShortVersionString" -A 1 "$macos_app" | tail -n 1 | sed -Er "s/[a-zA-Z<>\/ ]+//g" | trim
       return 0
     fi

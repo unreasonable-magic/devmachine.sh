@@ -3,7 +3,7 @@
 eval "$(stdlib shellenv)"
 
 stdlib_import "log"
-log_init
+stdlib_log_init
 if [[ "$DEBUG" == "true" ]]; then
   log_set_level "$LOG_LEVEL_DEBUG"
 fi
@@ -11,7 +11,7 @@ fi
 stdlib_import "error"
 stdlib_import "test"
 stdlib_import "image"
-stdlib_import "array"
+stdlib_import "array/join"
 stdlib_import "color"
 stdlib_import "debugger"
 stdlib_import "url/parse"
@@ -44,10 +44,10 @@ if [[ "$#" -ge 1 ]]; then
     #
     # If it is, then we can just use that as the path, otherwise we'll
     # make up a path using DEVFILES_PATH
-    if ! stdlib_test_is_file "$devfile"; then
+    if stdlib_test file/is_missing "$devfile"; then
       devfile="$DEVFILES_PATH/${devfile%\.sh}.sh"
 
-      if ! stdlib_test_exists "$devfile"; then
+      if stdlib_test file/is_missing "$devfile"; then
         stdlib_error_fatal "no devfile %s" "$devfile"
       fi
     fi
@@ -98,7 +98,7 @@ case "$action" in
   action="${action:1}"
   cli_file="$DEVMACHINE_PATH/cli/${action}.sh"
 
-  if stdlib_test_exists "$cli_file"; then
+  if stdlib_test file/exists "$cli_file"; then
     stdlib_source "${cli_file}" "${@:2}"
   else
     stdlib_error_fatal "unknown command $action"

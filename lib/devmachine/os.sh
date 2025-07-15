@@ -29,23 +29,23 @@ os::install() {
   ui::logfunc "os::install" "$@"
 
   case "$(os::install::tool)" in
-    pacman)
-      os::install::pacman "$@"
-      ;;
-    brew)
-      os::install::brew "$@"
-      ;;
+  pacman)
+    os::install::pacman "$@"
+    ;;
+  brew)
+    os::install::brew "$@"
+    ;;
   esac
 }
 
 os::installcheck() {
   case "$(os::install::tool)" in
-    pacman)
-      pacman -Q "$1" &> /dev/null
-      ;;
-    brew)
-      brew list "$1" &> /dev/null
-      ;;
+  pacman)
+    pacman -Q "$1" &>/dev/null
+    ;;
+  brew)
+    brew list "$1" &>/dev/null
+    ;;
   esac
 }
 
@@ -78,7 +78,7 @@ os::softdelete() {
 
   local path="$(os::expandpath "$1")"
 
-  if stdlib_test_exists "$path"; then
+  if stdlib_test file/exists "$path"; then
     new_path="$path.$(date +%Y%m%d%H%M%S).backup"
 
     os::sh mv "$path" "$new_path"
@@ -112,11 +112,11 @@ os::download() {
       url=$(
         echo -E $latest_release_json |
           jq --raw-output --arg pattern "$asset_search_pattern" '.assets[] | select(.name | test($pattern; "i")) | .browser_download_url'
-        )
+      )
 
-        ui::loginfo "rewrote download url to %s" "$url"
-      else
-        stdlib_error_fatal "not sure how to download this %s" "$url"
+      ui::loginfo "rewrote download url to %s" "$url"
+    else
+      stdlib_error_fatal "not sure how to download this %s" "$url"
     fi
   fi
 
@@ -131,17 +131,17 @@ os::linkfile() {
 
   # If the file we're trying to link doesn't exist, then something the user has
   # done is very wrong, so we should error out and stop everything
-  if ! stdlib_test_exists "$source_file"; then
+  if ! stdlib_test file/exists "$source_file"; then
     stdlib_error_fatal "source file $source_file no exist"
   fi
 
   target_dir="$(dirname "$target_link")"
 
-  if ! stdlib_test_is_dir "$target_dir"; then
+  if ! stdlib_test file/is_regular "$target_dir"; then
     os::sh mkdir -p "$target_dir"
   fi
 
-  if stdlib_test_exists "$target_link"; then
+  if stdlib_test file/exists "$target_link"; then
     if [[ "$(realpath $source_file)" == "$(realpath $target_link)" ]]; then
       return
     else
