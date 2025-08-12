@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ui::banner::small() {
-  stdlib_color_rainbow -f <<-'EOF'
+  cat <<-'EOF'
      _                       _    _
   __| |_____ ___ __  __ _ __| |_ (_)_ _  ___
  / _` / -_) V / '  \/ _` / _| ' \| | ' \/ -_)

@@ -9,7 +9,7 @@ stdlib_import "string/trim"
 os::detect_installed() {
   local command_name="$1"
 
-  log_debug "checking for ${command_name}"
+  stdlib_log_debug "checking for ${command_name}"
 
   if [ -z "$command_name" ]; then
     return $DETECT_INVALID_ARGS_ERROR
@@ -25,8 +25,8 @@ os::detect_installed() {
     titleize -v app_name "${command_name}"
 
     local macos_app="/Applications/${app_name}.app/Contents/Info.plist"
-    log_debug "${command_name} not found on \$PATH"
-    log_debug "checking for ${macos_app}"
+    stdlib_log_debug "${command_name} not found on \$PATH"
+    stdlib_log_debug "checking for ${macos_app}"
 
     if stdlib_test file/is_regular "$macos_app"; then
       grep "CFBundleShortVersionString" -A 1 "$macos_app" | tail -n 1 | sed -Er "s/[a-zA-Z<>\/ ]+//g" | trim
@@ -50,7 +50,7 @@ os::detect_installed() {
   for flag in "${possible_version_flags[@]}"; do
     local found_version_text=""
 
-    log_debug "\$ ${command_path} ${flag}"
+    stdlib_log_debug "\$ ${command_path} ${flag}"
 
     if version_output=$("$command_path" "$flag" 2>&1); then
       found_version_text=$(
