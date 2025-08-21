@@ -44,5 +44,5 @@ shell::rcfile() {
 
   buffer+=("devmachine $shell_name motd")
 
-  stdlib_array_join "\n" "${buffer[@]}"
+  stdlib_array_join --delim $'\n' "${buffer[@]}"
 }
