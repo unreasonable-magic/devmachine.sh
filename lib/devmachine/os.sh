@@ -21,8 +21,28 @@ os::install::brew() {
   os::sh brew install "$1" -q
 }
 
+os::updatepackage::brew() {
+  os::sh export HOMEBREW_NO_AUTO_UPDATE=true
+  os::sh export HOMEBREW_NO_INSTALL_UPGRADE=true
+  os::sh export HOMEBREW_NO_ENV_HINTS=true
+  os::sh brew upgrade "$1" -q
+}
+
 os::install::pacman() {
   os::sh sudo pacman --sync --noconfirm --needed "$1"
+}
+
+os::updatepackage() {
+  ui::logfunc "os::updatepackage" "$@"
+
+  case "$(os::install::tool)" in
+  pacman)
+    os::install::pacman "$@"
+    ;;
+  brew)
+    os::updatepackage::brew "$@"
+    ;;
+  esac
 }
 
 os::install() {
